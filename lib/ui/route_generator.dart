@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'app_routes.dart';
-import '../ui/start/start_page.dart';
+import 'start/start_page.dart';
 
 class EnsureAuthenticatedMiddleware extends GetMiddleware {
   @override
