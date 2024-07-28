@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
-import 'package:quotes_mobile/home/fav/favourite_controller.dart';
+
+import 'favourite_page.dart';
 
 class FavouriteScreen extends GetView<FavouriteController> {
   const FavouriteScreen({super.key});

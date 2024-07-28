@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
-import '../app_routes.dart';
+import 'app_routes.dart';
 
 // coverage:ignore-file
 class AppInitHelper {

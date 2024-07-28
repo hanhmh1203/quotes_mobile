@@ -1,6 +1,7 @@
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
-import 'package:quotes_mobile/home/random/random_controller.dart';
+
+import 'random_page.dart';
 
 class RandomScreen extends GetView<RandomController>{
   const RandomScreen({super.key});

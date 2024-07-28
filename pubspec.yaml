@@ -27,12 +27,14 @@ environment:
 # dependencies can be manually updated by changing the version numbers below to
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
+isar_version: &isar_version 3.1.0
 dependencies:
   flutter:
     sdk: flutter
 
   get: ^4.6.6
-  isar: ^3.1.0+1
+  isar: *isar_version
+  isar_flutter_libs: *isar_version
   easy_localization: ^3.0.7
   retrofit: ^4.1.0
   # The following adds the Cupertino Icons font to your application.
@@ -45,6 +47,7 @@ dev_dependencies:
   retrofit_generator: ^8.1.2
   build_runner: ^2.4.11
   built_value_generator: ^8.9.2
+  isar_generator: *isar_version
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your

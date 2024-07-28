@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
-import 'package:quotes_mobile/Constants.dart';
-import 'package:quotes_mobile/route_generator.dart';
+import 'package:quotes_mobile/core/Constants.dart';
+import 'package:quotes_mobile/core/route_generator.dart';
 
-import 'app_binding.dart';
-import 'init_app_helper.dart';
+import 'core/app_binding.dart';
+import 'core/init_app_helper.dart';
 
 void main() {
   runApp(MyApp(initRoute: AppInitHelper.getStartRoute()));
