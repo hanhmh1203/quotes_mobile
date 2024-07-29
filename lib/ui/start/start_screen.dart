@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 
@@ -10,6 +11,12 @@ class StartScreen extends GetView<StartController> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Container();
+    controller.parseJson();
+    return Scaffold(
+        body: SafeArea(
+      child: Container(
+        child: Text("StartScreen"),
+      ),
+    ));
   }
 }

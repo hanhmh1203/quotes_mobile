@@ -6,7 +6,7 @@ class TypeRepository {
   late Isar isar;
   // late QuoteTypeModel _model;
 
-  TypeRepository(this.isar);
+  TypeRepository({required this.isar});
   void saveQuoteType() async {
     final quoteType = QuoteTypeModel(type: 'Inspirational');
 

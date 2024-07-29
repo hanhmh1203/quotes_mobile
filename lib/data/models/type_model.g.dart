@@ -28,7 +28,21 @@ const QuoteTypeModelSchema = CollectionSchema(
   deserialize: _quoteTypeModelDeserialize,
   deserializeProp: _quoteTypeModelDeserializeProp,
   idName: r'id',
-  indexes: {},
+  indexes: {
+    r'type': IndexSchema(
+      id: 5117122708147080838,
+      name: r'type',
+      unique: true,
+      replace: false,
+      properties: [
+        IndexPropertySchema(
+          name: r'type',
+          type: IndexType.hash,
+          caseSensitive: true,
+        )
+      ],
+    )
+  },
   links: {},
   embeddedSchemas: {},
   getId: _quoteTypeModelGetId,
@@ -94,6 +108,61 @@ List<IsarLinkBase<dynamic>> _quoteTypeModelGetLinks(QuoteTypeModel object) {
 void _quoteTypeModelAttach(
     IsarCollection<dynamic> col, Id id, QuoteTypeModel object) {
   object.id = id;
+}
+
+extension QuoteTypeModelByIndex on IsarCollection<QuoteTypeModel> {
+  Future<QuoteTypeModel?> getByType(String type) {
+    return getByIndex(r'type', [type]);
+  }
+
+  QuoteTypeModel? getByTypeSync(String type) {
+    return getByIndexSync(r'type', [type]);
+  }
+
+  Future<bool> deleteByType(String type) {
+    return deleteByIndex(r'type', [type]);
+  }
+
+  bool deleteByTypeSync(String type) {
+    return deleteByIndexSync(r'type', [type]);
+  }
+
+  Future<List<QuoteTypeModel?>> getAllByType(List<String> typeValues) {
+    final values = typeValues.map((e) => [e]).toList();
+    return getAllByIndex(r'type', values);
+  }
+
+  List<QuoteTypeModel?> getAllByTypeSync(List<String> typeValues) {
+    final values = typeValues.map((e) => [e]).toList();
+    return getAllByIndexSync(r'type', values);
+  }
+
+  Future<int> deleteAllByType(List<String> typeValues) {
+    final values = typeValues.map((e) => [e]).toList();
+    return deleteAllByIndex(r'type', values);
+  }
+
+  int deleteAllByTypeSync(List<String> typeValues) {
+    final values = typeValues.map((e) => [e]).toList();
+    return deleteAllByIndexSync(r'type', values);
+  }
+
+  Future<Id> putByType(QuoteTypeModel object) {
+    return putByIndex(r'type', object);
+  }
+
+  Id putByTypeSync(QuoteTypeModel object, {bool saveLinks = true}) {
+    return putByIndexSync(r'type', object, saveLinks: saveLinks);
+  }
+
+  Future<List<Id>> putAllByType(List<QuoteTypeModel> objects) {
+    return putAllByIndex(r'type', objects);
+  }
+
+  List<Id> putAllByTypeSync(List<QuoteTypeModel> objects,
+      {bool saveLinks = true}) {
+    return putAllByIndexSync(r'type', objects, saveLinks: saveLinks);
+  }
 }
 
 extension QuoteTypeModelQueryWhereSort
@@ -173,6 +242,51 @@ extension QuoteTypeModelQueryWhere
         upper: upperId,
         includeUpper: includeUpper,
       ));
+    });
+  }
+
+  QueryBuilder<QuoteTypeModel, QuoteTypeModel, QAfterWhereClause> typeEqualTo(
+      String type) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.equalTo(
+        indexName: r'type',
+        value: [type],
+      ));
+    });
+  }
+
+  QueryBuilder<QuoteTypeModel, QuoteTypeModel, QAfterWhereClause>
+      typeNotEqualTo(String type) {
+    return QueryBuilder.apply(this, (query) {
+      if (query.whereSort == Sort.asc) {
+        return query
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'type',
+              lower: [],
+              upper: [type],
+              includeUpper: false,
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'type',
+              lower: [type],
+              includeLower: false,
+              upper: [],
+            ));
+      } else {
+        return query
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'type',
+              lower: [type],
+              includeLower: false,
+              upper: [],
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'type',
+              lower: [],
+              upper: [type],
+              includeUpper: false,
+            ));
+      }
     });
   }
 }

@@ -33,8 +33,29 @@ const AuthorModelSchema = CollectionSchema(
   deserialize: _authorModelDeserialize,
   deserializeProp: _authorModelDeserializeProp,
   idName: r'id',
-  indexes: {},
-  links: {},
+  indexes: {
+    r'name': IndexSchema(
+      id: 879695947855722453,
+      name: r'name',
+      unique: true,
+      replace: false,
+      properties: [
+        IndexPropertySchema(
+          name: r'name',
+          type: IndexType.hash,
+          caseSensitive: true,
+        )
+      ],
+    )
+  },
+  links: {
+    r'quotes': LinkSchema(
+      id: -6463995133507569058,
+      name: r'quotes',
+      target: r'QuoteModel',
+      single: false,
+    )
+  },
   embeddedSchemas: {},
   getId: _authorModelGetId,
   getLinks: _authorModelGetLinks,
@@ -48,7 +69,12 @@ int _authorModelEstimateSize(
   Map<Type, List<int>> allOffsets,
 ) {
   var bytesCount = offsets.last;
-  bytesCount += 3 + object.bio.length * 3;
+  {
+    final value = object.bio;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
   bytesCount += 3 + object.name.length * 3;
   return bytesCount;
 }
@@ -70,7 +96,7 @@ AuthorModel _authorModelDeserialize(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = AuthorModel(
-    bio: reader.readString(offsets[0]),
+    bio: reader.readStringOrNull(offsets[0]),
     name: reader.readString(offsets[1]),
   );
   object.id = id;
@@ -85,7 +111,7 @@ P _authorModelDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
-      return (reader.readString(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 1:
       return (reader.readString(offset)) as P;
     default:
@@ -98,12 +124,68 @@ Id _authorModelGetId(AuthorModel object) {
 }
 
 List<IsarLinkBase<dynamic>> _authorModelGetLinks(AuthorModel object) {
-  return [];
+  return [object.quotes];
 }
 
 void _authorModelAttach(
     IsarCollection<dynamic> col, Id id, AuthorModel object) {
   object.id = id;
+  object.quotes.attach(col, col.isar.collection<QuoteModel>(), r'quotes', id);
+}
+
+extension AuthorModelByIndex on IsarCollection<AuthorModel> {
+  Future<AuthorModel?> getByName(String name) {
+    return getByIndex(r'name', [name]);
+  }
+
+  AuthorModel? getByNameSync(String name) {
+    return getByIndexSync(r'name', [name]);
+  }
+
+  Future<bool> deleteByName(String name) {
+    return deleteByIndex(r'name', [name]);
+  }
+
+  bool deleteByNameSync(String name) {
+    return deleteByIndexSync(r'name', [name]);
+  }
+
+  Future<List<AuthorModel?>> getAllByName(List<String> nameValues) {
+    final values = nameValues.map((e) => [e]).toList();
+    return getAllByIndex(r'name', values);
+  }
+
+  List<AuthorModel?> getAllByNameSync(List<String> nameValues) {
+    final values = nameValues.map((e) => [e]).toList();
+    return getAllByIndexSync(r'name', values);
+  }
+
+  Future<int> deleteAllByName(List<String> nameValues) {
+    final values = nameValues.map((e) => [e]).toList();
+    return deleteAllByIndex(r'name', values);
+  }
+
+  int deleteAllByNameSync(List<String> nameValues) {
+    final values = nameValues.map((e) => [e]).toList();
+    return deleteAllByIndexSync(r'name', values);
+  }
+
+  Future<Id> putByName(AuthorModel object) {
+    return putByIndex(r'name', object);
+  }
+
+  Id putByNameSync(AuthorModel object, {bool saveLinks = true}) {
+    return putByIndexSync(r'name', object, saveLinks: saveLinks);
+  }
+
+  Future<List<Id>> putAllByName(List<AuthorModel> objects) {
+    return putAllByIndex(r'name', objects);
+  }
+
+  List<Id> putAllByNameSync(List<AuthorModel> objects,
+      {bool saveLinks = true}) {
+    return putAllByIndexSync(r'name', objects, saveLinks: saveLinks);
+  }
 }
 
 extension AuthorModelQueryWhereSort
@@ -182,12 +264,73 @@ extension AuthorModelQueryWhere
       ));
     });
   }
+
+  QueryBuilder<AuthorModel, AuthorModel, QAfterWhereClause> nameEqualTo(
+      String name) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.equalTo(
+        indexName: r'name',
+        value: [name],
+      ));
+    });
+  }
+
+  QueryBuilder<AuthorModel, AuthorModel, QAfterWhereClause> nameNotEqualTo(
+      String name) {
+    return QueryBuilder.apply(this, (query) {
+      if (query.whereSort == Sort.asc) {
+        return query
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'name',
+              lower: [],
+              upper: [name],
+              includeUpper: false,
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'name',
+              lower: [name],
+              includeLower: false,
+              upper: [],
+            ));
+      } else {
+        return query
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'name',
+              lower: [name],
+              includeLower: false,
+              upper: [],
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'name',
+              lower: [],
+              upper: [name],
+              includeUpper: false,
+            ));
+      }
+    });
+  }
 }
 
 extension AuthorModelQueryFilter
     on QueryBuilder<AuthorModel, AuthorModel, QFilterCondition> {
+  QueryBuilder<AuthorModel, AuthorModel, QAfterFilterCondition> bioIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'bio',
+      ));
+    });
+  }
+
+  QueryBuilder<AuthorModel, AuthorModel, QAfterFilterCondition> bioIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'bio',
+      ));
+    });
+  }
+
   QueryBuilder<AuthorModel, AuthorModel, QAfterFilterCondition> bioEqualTo(
-    String value, {
+    String? value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -200,7 +343,7 @@ extension AuthorModelQueryFilter
   }
 
   QueryBuilder<AuthorModel, AuthorModel, QAfterFilterCondition> bioGreaterThan(
-    String value, {
+    String? value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -215,7 +358,7 @@ extension AuthorModelQueryFilter
   }
 
   QueryBuilder<AuthorModel, AuthorModel, QAfterFilterCondition> bioLessThan(
-    String value, {
+    String? value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -230,8 +373,8 @@ extension AuthorModelQueryFilter
   }
 
   QueryBuilder<AuthorModel, AuthorModel, QAfterFilterCondition> bioBetween(
-    String lower,
-    String upper, {
+    String? lower,
+    String? upper, {
     bool includeLower = true,
     bool includeUpper = true,
     bool caseSensitive = true,
@@ -506,7 +649,68 @@ extension AuthorModelQueryObject
     on QueryBuilder<AuthorModel, AuthorModel, QFilterCondition> {}
 
 extension AuthorModelQueryLinks
-    on QueryBuilder<AuthorModel, AuthorModel, QFilterCondition> {}
+    on QueryBuilder<AuthorModel, AuthorModel, QFilterCondition> {
+  QueryBuilder<AuthorModel, AuthorModel, QAfterFilterCondition> quotes(
+      FilterQuery<QuoteModel> q) {
+    return QueryBuilder.apply(this, (query) {
+      return query.link(q, r'quotes');
+    });
+  }
+
+  QueryBuilder<AuthorModel, AuthorModel, QAfterFilterCondition>
+      quotesLengthEqualTo(int length) {
+    return QueryBuilder.apply(this, (query) {
+      return query.linkLength(r'quotes', length, true, length, true);
+    });
+  }
+
+  QueryBuilder<AuthorModel, AuthorModel, QAfterFilterCondition>
+      quotesIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.linkLength(r'quotes', 0, true, 0, true);
+    });
+  }
+
+  QueryBuilder<AuthorModel, AuthorModel, QAfterFilterCondition>
+      quotesIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.linkLength(r'quotes', 0, false, 999999, true);
+    });
+  }
+
+  QueryBuilder<AuthorModel, AuthorModel, QAfterFilterCondition>
+      quotesLengthLessThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.linkLength(r'quotes', 0, true, length, include);
+    });
+  }
+
+  QueryBuilder<AuthorModel, AuthorModel, QAfterFilterCondition>
+      quotesLengthGreaterThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.linkLength(r'quotes', length, include, 999999, true);
+    });
+  }
+
+  QueryBuilder<AuthorModel, AuthorModel, QAfterFilterCondition>
+      quotesLengthBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.linkLength(
+          r'quotes', lower, includeLower, upper, includeUpper);
+    });
+  }
+}
 
 extension AuthorModelQuerySortBy
     on QueryBuilder<AuthorModel, AuthorModel, QSortBy> {
@@ -599,7 +803,7 @@ extension AuthorModelQueryProperty
     });
   }
 
-  QueryBuilder<AuthorModel, String, QQueryOperations> bioProperty() {
+  QueryBuilder<AuthorModel, String?, QQueryOperations> bioProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'bio');
     });
