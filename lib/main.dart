@@ -7,6 +7,7 @@ import 'package:quotes_mobile/core/Constants.dart';
 import 'package:quotes_mobile/data/models/author_model.dart';
 import 'package:quotes_mobile/data/models/quote_model.dart';
 import 'package:quotes_mobile/data/models/type_model.dart';
+import 'package:quotes_mobile/ui/bottom_menu/bottom_nav_bar.dart';
 import 'package:quotes_mobile/ui/route_generator.dart';
 
 import 'core/app_binding.dart';
@@ -45,6 +46,7 @@ class MyApp extends StatelessWidget {
       initialBinding: AppBinding(isar: isar),
       initialRoute: initRoute,
       getPages: routes,
+      // home: BottomNavBar(),
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
