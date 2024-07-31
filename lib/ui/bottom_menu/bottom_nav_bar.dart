@@ -5,7 +5,6 @@ import '../fav/favourite_screen.dart';
 import '../setting/setting_screen.dart';
 import '../start/start_screen.dart';
 
-
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar({Key? key}) : super(key: key);
 
@@ -14,10 +13,9 @@ class BottomNavBar extends StatelessWidget {
     // Hàm này tạo danh sách các màn hình sẽ được hiển thị khi nhấn vào các mục của thanh điều hướng
     List<Widget> _buildScreens() {
       return [
-         const StartScreen(),
-          const SettingScreen(),
-          const FavouriteScreen(),
-
+        const StartScreen(),
+        const SettingScreen(),
+        const FavouriteScreen(),
       ];
     }
 
@@ -53,33 +51,48 @@ class BottomNavBar extends StatelessWidget {
     }
 
     // Tạo bộ điều khiển cho thanh điều hướng với chỉ số ban đầu là 0
-    PersistentTabController _controller = PersistentTabController(initialIndex: 0);
+    PersistentTabController _controller =
+        PersistentTabController(initialIndex: 0);
 
     return PersistentTabView(
       context,
       controller: _controller,
-      screens: _buildScreens(), // Truyền danh sách các màn hình vào thanh điều hướng
-      items: _navBarsItems(), // Truyền danh sách các mục vào thanh điều hướng
-      handleAndroidBackButtonPress: true, // Mặc định là true, xử lý nút quay lại trên Android
-      resizeToAvoidBottomInset: true, // Mặc định là true, điều chỉnh kích thước khi bàn phím xuất hiện
-      stateManagement: true, // Mặc định là true, quản lý trạng thái
-      hideNavigationBarWhenKeyboardAppears: true, // Ẩn thanh điều hướng khi bàn phím xuất hiện
-      padding: const EdgeInsets.only(top: 8), // Đệm trên cho thanh điều hướng
-      backgroundColor: Colors.white, // Màu nền của thanh điều hướng
-      isVisible: true, // Thanh điều hướng có hiển thị hay không
+      screens: _buildScreens(),
+      // Truyền danh sách các màn hình vào thanh điều hướng
+      items: _navBarsItems(),
+      // Truyền danh sách các mục vào thanh điều hướng
+      handleAndroidBackButtonPress: true,
+      // Mặc định là true, xử lý nút quay lại trên Android
+      resizeToAvoidBottomInset: true,
+      // Mặc định là true, điều chỉnh kích thước khi bàn phím xuất hiện
+      stateManagement: true,
+      // Mặc định là true, quản lý trạng thái
+      hideNavigationBarWhenKeyboardAppears: true,
+      // Ẩn thanh điều hướng khi bàn phím xuất hiện
+      padding: const EdgeInsets.only(top: 8),
+      // Đệm trên cho thanh điều hướng
+      backgroundColor: Colors.white,
+      // Màu nền của thanh điều hướng
+      isVisible: true,
+      // Thanh điều hướng có hiển thị hay không
       animationSettings: const NavBarAnimationSettings(
         navBarItemAnimation: ItemAnimationSettings(
           duration: Duration(milliseconds: 400), // Thời gian cho hoạt ảnh
           curve: Curves.ease, // Đường cong hoạt ảnh
         ),
         screenTransitionAnimation: ScreenTransitionAnimationSettings(
-          animateTabTransition: true, // Có chuyển động khi chuyển đổi tab không
-          duration: Duration(milliseconds: 250), // Thời gian cho hoạt ảnh chuyển đổi
-          screenTransitionAnimationType: ScreenTransitionAnimationType.slide, // Loại hoạt ảnh chuyển đổi
+          animateTabTransition: true,
+          // Có chuyển động khi chuyển đổi tab không
+          duration: Duration(milliseconds: 250),
+          // Thời gian cho hoạt ảnh chuyển đổi
+          screenTransitionAnimationType:
+              ScreenTransitionAnimationType.slide, // Loại hoạt ảnh chuyển đổi
         ),
       ),
-      confineToSafeArea: true, // Giới hạn trong khu vực an toàn của màn hình
-      navBarHeight: kBottomNavigationBarHeight, // Chiều cao của thanh điều hướng
+      confineToSafeArea: true,
+      // Giới hạn trong khu vực an toàn của màn hình
+      navBarHeight: kBottomNavigationBarHeight,
+      // Chiều cao của thanh điều hướng
       navBarStyle: NavBarStyle.style1, // Kiểu của thanh điều hướng
     );
   }

@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
       initialBinding: AppBinding(isar: isar),
       initialRoute: initRoute,
       getPages: routes,
-      home: BottomNavBar(),
+      // home: BottomNavBar(),
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
