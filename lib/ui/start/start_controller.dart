@@ -16,8 +16,8 @@ class StartController extends BaseController {
 
   Future<void> parseJson() async {
     List<QuoteJsonModel> data = await ReadJsonFileHelper.readDummyData();
-    var list = data.map((e) => QuoteModel.fromJsonModel(e)).toList();
+
     QuoteRepository repository = Get.find();
-    repository.saveQuote(list);
+    repository.saveQuote(data);
   }
 }
