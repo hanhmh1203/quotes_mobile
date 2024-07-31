@@ -8,9 +8,9 @@ class QuoteRepository {
   QuoteRepository({required this.isar});
 
   saveQuote(List<QuoteModel>data) {
-    isar.writeTxnSync(() {
-      isar.quoteModels.putAllSync(data);
-    });
+    // isar.writeTxnSync(() {
+    //   isar.quoteModels.putAllSync(data);
+    // });
     // for (QuoteModel model in data) {
     //   isar.writeTxnSync(() {
     //     isar.quoteModels.putAllSync(objects)
