@@ -18,11 +18,14 @@ class QuoteModel {
     var model = QuoteModel(content: json.content);
 
     List<String> arr = json.topic.split(",");
+    print("QuoteModel arr:$arr");
     List<QuoteTypeModel> quoteTypes = arr.map((e) => QuoteTypeModel(type: e.trim())).toList();
+    print("QuoteModel quoteTypes:$quoteTypes");
     model.quoteTypeModel.addAll(quoteTypes);
-
+    print("QuoteModel quoteTypeModel:${model.quoteTypeModel.isNotEmpty}");
     AuthorModel authorModel = AuthorModel(name: json.author.trim(), bio: '');
     model.author.value = authorModel;
+    print("QuoteModel author:${model.author.value}");
     return model;
   }
   QuoteModel({
