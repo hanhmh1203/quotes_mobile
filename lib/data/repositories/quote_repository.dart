@@ -11,8 +11,11 @@ class QuoteRepository {
   QuoteRepository({required this.isar});
 
   saveQuote(List<QuoteJsonModel> list) async {
-    var data = list.map((e) => QuoteModel.fromJsonModel(e)).toList();
-
+    // var data = list.map((e) => QuoteModel.fromJsonModel(e)).toList();
+    var data = <QuoteModel>[];
+    for(var json in list){
+      QuoteModel.fromJsonModel(json);
+    }
     for (var e in data) {
       if (e.author.value != null) {
         var author = await isar.authorModels
