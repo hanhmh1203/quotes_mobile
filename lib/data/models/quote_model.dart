@@ -12,22 +12,26 @@ class QuoteModel {
   late String content;
   late bool isFavorite; // New field to mark quote as favorite
   late bool isMine; // New field to mark quote as favorite
+  // @Backlink(to: 'AuthorModel')
   final author = IsarLink<AuthorModel>();
-  final quoteTypeModel =  IsarLinks<QuoteTypeModel>();
-  factory QuoteModel.fromJsonModel(QuoteJsonModel json){
+  final quoteTypeModel = IsarLinks<QuoteTypeModel>();
+  @ignore
+  List<QuoteTypeModel> tempQuoteTypes = [];
+  @ignore
+  AuthorModel? tempAuthor;
+
+  factory QuoteModel.fromJsonModel(QuoteJsonModel json) {
     var model = QuoteModel(content: json.content);
 
     List<String> arr = json.topic.split(",");
-    print("QuoteModel arr:$arr");
-    List<QuoteTypeModel> quoteTypes = arr.map((e) => QuoteTypeModel(type: e.trim())).toList();
-    print("QuoteModel quoteTypes:$quoteTypes");
-    model.quoteTypeModel.addAll(quoteTypes);
-    print("QuoteModel quoteTypeModel:${model.quoteTypeModel.isNotEmpty}");
+    List<QuoteTypeModel> quoteTypes =
+        arr.map((e) => QuoteTypeModel(type: e.trim())).toList();
+    model.tempQuoteTypes.addAll(quoteTypes);
     AuthorModel authorModel = AuthorModel(name: json.author.trim(), bio: '');
-    model.author.value = authorModel;
-    print("QuoteModel author:${model.author.value}");
+    model.tempAuthor = authorModel;
     return model;
   }
+
   QuoteModel({
     required this.content,
     this.isFavorite = false, // Default value is false

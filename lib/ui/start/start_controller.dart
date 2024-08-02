@@ -12,12 +12,15 @@ class StartController extends BaseController {
   Future<void> onReady() async {
     // TODO: implement onReady
     super.onReady();
+    // parseJson();
   }
 
   Future<void> parseJson() async {
+    print("parseJson");
     List<QuoteJsonModel> data = await ReadJsonFileHelper.readDummyData();
 
     QuoteRepository repository = Get.find();
-    repository.saveQuote(data);
+    repository.clearAllData();
+    repository.saveQuoteSync(data);
   }
 }

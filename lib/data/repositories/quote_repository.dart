@@ -10,56 +10,91 @@ class QuoteRepository {
 
   QuoteRepository({required this.isar});
 
-  saveQuote(List<QuoteJsonModel> list) async {
-    // var data = list.map((e) => QuoteModel.fromJsonModel(e)).toList();
-    var data = <QuoteModel>[];
-    for(var json in list){
-      QuoteModel.fromJsonModel(json);
-    }
+  void clearAllData() async {
+    await isar.writeTxn(() async {
+      await isar.quoteModels.clear();
+      await isar.authorModels.clear();
+      await isar.quoteTypeModels.clear();
+    });
+  }
+
+  void saveQuoteSync(List<QuoteJsonModel> list) async {
+    var data = list.map((e) => QuoteModel.fromJsonModel(e)).toList();
     for (var e in data) {
-      if (e.author.value != null) {
+      if (e.tempAuthor != null) {
         var author = await isar.authorModels
             .where()
-            .nameEqualTo(e.author.value!.name)
+            .nameEqualTo(e.tempAuthor!.name)
             .findFirst();
         if (author != null) {
+          print("${e.tempAuthor!.name} author != null");
           e.author.value = author;
         } else {
-          await isar.writeTxn(() async {
-            await isar.authorModels.put(e.author.value!);
-          });
+          print("${e.tempAuthor!.name} author = null");
+          e.author.value = e.tempAuthor;
         }
       }
-
       List<QuoteTypeModel> types = [];
-      print("saveQuote quoteTypeModel ${e.quoteTypeModel.isNotEmpty}");
-      for (var type in e.quoteTypeModel) {
+      for (var type in e.tempQuoteTypes) {
+        QuoteTypeModel inputType;
         var first = await isar.quoteTypeModels
             .where()
             .typeEqualTo(type.type)
             .findFirst();
         if (first != null) {
+          inputType = first;
           types.add(first);
-          print("saveQuote type: query notnull $first");
         } else {
-          await isar.quoteTypeModels.put(type);
-          print("saveQuote type: ${type}");
+          inputType = type;
           types.add(type);
         }
+        e.quoteTypeModel.add(inputType);
       }
-      e.quoteTypeModel.clear();
-      e.quoteTypeModel.addAll(types);
-      isar.writeTxnSync((){
+      await isar.writeTxnSync(() async {
         isar.quoteModels.putSync(e);
       });
+      // isar.quoteTypeModels.where().typeEqualTo("life");
     }
-    // isar.writeTxnSync((){
-    //     isar.quoteModels.putAllSync(data);
-    // });
-    // await isar.writeTxn(() async {
-    //   for (var item in data) {
-    //     await isar.quoteModels.put(item);
-    //   }
-    // });
+  }
+
+  void saveQuote(List<QuoteJsonModel> list) async {
+    var data = list.map((e) => QuoteModel.fromJsonModel(e)).toList();
+    await isar.writeTxn(() async {
+      for (var e in data) {
+        if (e.tempAuthor != null) {
+          var author = await isar.authorModels
+              .where()
+              .nameEqualTo(e.tempAuthor!.name)
+              .findFirst();
+          if (author != null) {
+            e.author.value = author;
+          } else {
+            e.author.value = e.tempAuthor;
+          }
+          await isar.authorModels.put(e.author.value!);
+        }
+        await isar.quoteModels.put(e);
+        await e.author.save();
+
+        List<QuoteTypeModel> types = [];
+        for (var type in e.tempQuoteTypes) {
+          QuoteTypeModel inputType;
+          var first = await isar.quoteTypeModels
+              .where()
+              .typeEqualTo(type.type)
+              .findFirst();
+          if (first != null) {
+            inputType = first;
+            types.add(first);
+          } else {
+            inputType = type;
+            types.add(type);
+          }
+          await isar.quoteTypeModels.put(inputType);
+          e.quoteTypeModel.add(inputType);
+        }
+        await e.quoteTypeModel.save();
+      }
+    });
   }
 }
