@@ -9,6 +9,7 @@ part 'quote_model.g.dart';
 @collection
 class QuoteModel {
   Id id = Isar.autoIncrement; // Auto increment ID
+  @Index(unique: true)
   late String content;
   late bool isFavorite; // New field to mark quote as favorite
   late bool isMine; // New field to mark quote as favorite

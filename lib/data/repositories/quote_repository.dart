@@ -21,16 +21,20 @@ class QuoteRepository {
   void saveQuoteSync(List<QuoteJsonModel> list) async {
     var data = list.map((e) => QuoteModel.fromJsonModel(e)).toList();
     for (var e in data) {
+      var dbItem =
+          await isar.quoteModels.where().contentEqualTo(e.content).findFirst();
+      if (dbItem != null) {
+        // do not save this item.
+        continue;
+      }
       if (e.tempAuthor != null) {
         var author = await isar.authorModels
             .where()
             .nameEqualTo(e.tempAuthor!.name)
             .findFirst();
         if (author != null) {
-          print("${e.tempAuthor!.name} author != null");
           e.author.value = author;
         } else {
-          print("${e.tempAuthor!.name} author = null");
           e.author.value = e.tempAuthor;
         }
       }
@@ -50,13 +54,13 @@ class QuoteRepository {
         }
         e.quoteTypeModel.add(inputType);
       }
+      // save all relation.
       await isar.writeTxnSync(() async {
         isar.quoteModels.putSync(e);
       });
-      // isar.quoteTypeModels.where().typeEqualTo("life");
     }
   }
-
+  @deprecated
   void saveQuote(List<QuoteJsonModel> list) async {
     var data = list.map((e) => QuoteModel.fromJsonModel(e)).toList();
     await isar.writeTxn(() async {
