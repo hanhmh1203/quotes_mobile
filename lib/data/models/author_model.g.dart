@@ -50,10 +50,11 @@ const AuthorModelSchema = CollectionSchema(
   },
   links: {
     r'quotes': LinkSchema(
-      id: -6463995133507569058,
+      id: 1633176405867740262,
       name: r'quotes',
       target: r'QuoteModel',
       single: false,
+      linkName: r'author',
     )
   },
   embeddedSchemas: {},

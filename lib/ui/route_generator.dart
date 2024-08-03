@@ -23,7 +23,7 @@ class RouteGenerator {
         page: () => const BottomNavBar(),
         transition: Transition.rightToLeftWithFade,
         binding: BindingsBuilder(() {
-          Get.lazyPut(() => StartController());
+          Get.put(StartController());
         })),
   ];
 }

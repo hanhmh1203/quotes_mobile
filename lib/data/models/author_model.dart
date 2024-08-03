@@ -9,7 +9,12 @@ class AuthorModel{
   late String name;
 
   String? bio;
+  @Backlink(to: 'author')
   final quotes = IsarLinks<QuoteModel>();
   AuthorModel({required this.name, this.bio});
 
+  @override
+  String toString() {
+    return 'AuthorModel{id: $id, name: $name, quotes: $quotes}';
+  }
 }

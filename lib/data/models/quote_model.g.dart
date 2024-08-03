@@ -38,7 +38,21 @@ const QuoteModelSchema = CollectionSchema(
   deserialize: _quoteModelDeserialize,
   deserializeProp: _quoteModelDeserializeProp,
   idName: r'id',
-  indexes: {},
+  indexes: {
+    r'content': IndexSchema(
+      id: 6193209363630369380,
+      name: r'content',
+      unique: true,
+      replace: false,
+      properties: [
+        IndexPropertySchema(
+          name: r'content',
+          type: IndexType.hash,
+          caseSensitive: true,
+        )
+      ],
+    )
+  },
   links: {
     r'author': LinkSchema(
       id: 6131400814256040871,
@@ -129,6 +143,61 @@ void _quoteModelAttach(IsarCollection<dynamic> col, Id id, QuoteModel object) {
       col, col.isar.collection<QuoteTypeModel>(), r'quoteTypeModel', id);
 }
 
+extension QuoteModelByIndex on IsarCollection<QuoteModel> {
+  Future<QuoteModel?> getByContent(String content) {
+    return getByIndex(r'content', [content]);
+  }
+
+  QuoteModel? getByContentSync(String content) {
+    return getByIndexSync(r'content', [content]);
+  }
+
+  Future<bool> deleteByContent(String content) {
+    return deleteByIndex(r'content', [content]);
+  }
+
+  bool deleteByContentSync(String content) {
+    return deleteByIndexSync(r'content', [content]);
+  }
+
+  Future<List<QuoteModel?>> getAllByContent(List<String> contentValues) {
+    final values = contentValues.map((e) => [e]).toList();
+    return getAllByIndex(r'content', values);
+  }
+
+  List<QuoteModel?> getAllByContentSync(List<String> contentValues) {
+    final values = contentValues.map((e) => [e]).toList();
+    return getAllByIndexSync(r'content', values);
+  }
+
+  Future<int> deleteAllByContent(List<String> contentValues) {
+    final values = contentValues.map((e) => [e]).toList();
+    return deleteAllByIndex(r'content', values);
+  }
+
+  int deleteAllByContentSync(List<String> contentValues) {
+    final values = contentValues.map((e) => [e]).toList();
+    return deleteAllByIndexSync(r'content', values);
+  }
+
+  Future<Id> putByContent(QuoteModel object) {
+    return putByIndex(r'content', object);
+  }
+
+  Id putByContentSync(QuoteModel object, {bool saveLinks = true}) {
+    return putByIndexSync(r'content', object, saveLinks: saveLinks);
+  }
+
+  Future<List<Id>> putAllByContent(List<QuoteModel> objects) {
+    return putAllByIndex(r'content', objects);
+  }
+
+  List<Id> putAllByContentSync(List<QuoteModel> objects,
+      {bool saveLinks = true}) {
+    return putAllByIndexSync(r'content', objects, saveLinks: saveLinks);
+  }
+}
+
 extension QuoteModelQueryWhereSort
     on QueryBuilder<QuoteModel, QuoteModel, QWhere> {
   QueryBuilder<QuoteModel, QuoteModel, QAfterWhere> anyId() {
@@ -202,6 +271,51 @@ extension QuoteModelQueryWhere
         upper: upperId,
         includeUpper: includeUpper,
       ));
+    });
+  }
+
+  QueryBuilder<QuoteModel, QuoteModel, QAfterWhereClause> contentEqualTo(
+      String content) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addWhereClause(IndexWhereClause.equalTo(
+        indexName: r'content',
+        value: [content],
+      ));
+    });
+  }
+
+  QueryBuilder<QuoteModel, QuoteModel, QAfterWhereClause> contentNotEqualTo(
+      String content) {
+    return QueryBuilder.apply(this, (query) {
+      if (query.whereSort == Sort.asc) {
+        return query
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'content',
+              lower: [],
+              upper: [content],
+              includeUpper: false,
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'content',
+              lower: [content],
+              includeLower: false,
+              upper: [],
+            ));
+      } else {
+        return query
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'content',
+              lower: [content],
+              includeLower: false,
+              upper: [],
+            ))
+            .addWhereClause(IndexWhereClause.between(
+              indexName: r'content',
+              lower: [],
+              upper: [content],
+              includeUpper: false,
+            ));
+      }
     });
   }
 }
