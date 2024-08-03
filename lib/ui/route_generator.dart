@@ -22,7 +22,7 @@ class RouteGenerator {
         page: () => const StartScreen(),
         transition: Transition.rightToLeftWithFade,
         binding: BindingsBuilder(() {
-          Get.lazyPut(() => StartController());
+          Get.put(StartController());
         })),
   ];
 }

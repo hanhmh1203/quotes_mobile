@@ -13,4 +13,8 @@ class AuthorModel{
   final quotes = IsarLinks<QuoteModel>();
   AuthorModel({required this.name, this.bio});
 
+  @override
+  String toString() {
+    return 'AuthorModel{id: $id, name: $name, quotes: $quotes}';
+  }
 }

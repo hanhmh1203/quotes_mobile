@@ -12,4 +12,9 @@ class QuoteTypeModel {
   @Backlink(to: 'quoteTypeModel')
   final quotes = IsarLinks<QuoteModel>();
   QuoteTypeModel({required this.type});
+
+  @override
+  String toString() {
+    return 'QuoteTypeModel{id: $id, type: $type}';
+  }
 }

@@ -21,6 +21,11 @@ class QuoteModel {
   @ignore
   AuthorModel? tempAuthor;
 
+  @override
+  String toString() {
+    return 'QuoteModel{content: $content, tempQuoteTypes: $tempQuoteTypes, tempAuthor: $tempAuthor}';
+  }
+
   factory QuoteModel.fromJsonModel(QuoteJsonModel json) {
     var model = QuoteModel(content: json.content);
 

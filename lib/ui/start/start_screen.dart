@@ -13,10 +13,22 @@ class StartScreen extends GetView<StartController> {
     // TODO: implement build
     controller.parseJson();
     return Scaffold(
-        body: SafeArea(
-      child: Container(
-        child: Text("StartScreen"),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              child: Text("StartScreen"),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                controller.loadDataAuthor();
+              },
+              child: Text('Insert and Load Quotes'),
+            ),
+          ],
+        ),
       ),
-    ));
+    );
   }
 }
