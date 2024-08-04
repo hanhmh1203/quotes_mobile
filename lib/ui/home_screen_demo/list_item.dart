@@ -9,7 +9,15 @@ class ListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: color,
+        gradient: LinearGradient(
+          colors: [
+            color.withOpacity(0.3),
+            color.withOpacity(0.7),
+            color.withOpacity(1),
+          ],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        ),
         borderRadius: BorderRadius.circular(5),
       ),
       margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
@@ -25,7 +33,7 @@ class ListItem extends StatelessWidget {
                   padding: EdgeInsets.only(left: 10),
                   child: Text(
                     'Type ',
-                    style: TextStyle(fontSize: 18, color: Color(0xff00008b)),
+                    style: TextStyle(fontSize: 18, color: Color(0xff00008b),fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
@@ -41,20 +49,20 @@ class ListItem extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 25),
+          SizedBox(height: 30),
           Padding(
             padding: EdgeInsets.only(left: 5),
             child: Text(
-                "'Where I am, I don't know, I'll never know, in the silence you don't know, you must go on, I can't go on, I'll go on.'",
-                style: TextStyle(fontSize: 17, color: Color(0xff00008b))),
+                '"\nWhere I am, I don\'t know, I\'ll never know, in the silence you don\'t know, you must go on, I can\'t go on, I\'ll go on."',
+                style: TextStyle(fontSize: 20, color: Color(0xff00008b),fontWeight: FontWeight.bold)),
           ),
-          SizedBox(height: 15),
+          SizedBox(height: 20),
           Align(
             alignment: Alignment.centerRight,
             child: Padding(
               padding: EdgeInsets.only(right: 15),
-              child: Text('Samuel Beckett',
-                  style: TextStyle(fontSize: 16, color: Color(0xff00008b))),
+              child: Text('Samuel Beckett " ',
+                  style: TextStyle(fontSize: 18, color: Color(0xff00008b),fontWeight: FontWeight.bold )),
             ),
           ),
         ],
