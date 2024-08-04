@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:get/get_instance/get_instance.dart';
 import 'package:quotes_mobile/core/read_json_helper.dart';
 import 'package:quotes_mobile/data/models/quote_model.dart';
+import 'package:quotes_mobile/data/models/type_model.dart';
 import 'package:quotes_mobile/data/repositories/author_repository.dart';
 import 'package:quotes_mobile/data/repositories/quote_repository.dart';
 import 'package:quotes_mobile/data/repositories/type_repository.dart';
@@ -30,10 +31,18 @@ class StartController extends BaseController {
     QuoteRepository repository = Get.find();
     await repository.loadQuotes();
   }
+
+  Future<void> loadQuoteByType({required QuoteTypeModel typeModel}) async {
+    QuoteRepository repository = Get.find();
+    var list = await repository.loadQuotesByType(typeModel: typeModel);
+    print("loadQuoteByType list:${list.length}");
+  }
+
   Future<void> loadDataAuthor() async {
     AuthorRepository repository = Get.find();
     await repository.loadAuthors();
   }
+
   Future<void> loadDataType() async {
     TypeRepository repository = Get.find();
     await repository.loadTypes();
