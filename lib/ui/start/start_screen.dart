@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -15,9 +16,9 @@ class StartScreen extends GetView<StartController> {
     controller.parseJson();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('StartScreen'),
+        title: const Text('app_name').tr(),
       ),
-      drawer: const LeftMenuScreen(), // Sử dụng CustomDrawer
+      drawer: LeftMenuScreen(), // Sử dụng CustomDrawer
       body: const Center(
         child: Text(
           'StartScreen',

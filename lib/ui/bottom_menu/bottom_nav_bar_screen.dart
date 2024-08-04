@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
-import 'package:quotes_mobile/ui/home_screen_demo/screen1.dart';
+import 'package:quotes_mobile/ui/mine/mine_page.dart';
+import 'package:quotes_mobile/ui/random/random_page.dart';
 
 import '../fav/favourite_screen.dart';
 import '../setting/setting_screen.dart';
 import '../start/start_screen.dart';
 
-class BottomNavBar extends StatelessWidget {
-  const BottomNavBar({Key? key}) : super(key: key);
+class BottomNavBarScreen extends StatelessWidget {
+  const BottomNavBarScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     // Hàm này tạo danh sách các màn hình sẽ được hiển thị khi nhấn vào các mục của thanh điều hướng
     List<Widget> _buildScreens() {
       return [
-        // const StartScreen(),
-
-        const Screen1(),
-        const SettingScreen(),
+        const StartScreen(),
         const FavouriteScreen(),
+        const RandomScreen(),
+        const MineScreen(),
+        const SettingScreen(),
       ];
     }
 
@@ -39,8 +40,20 @@ class BottomNavBar extends StatelessWidget {
         ),
 
         PersistentBottomNavBarItem(
+          icon: const Icon(Icons.invert_colors_on_outlined),
+          title: ("Random"),
+          activeColorPrimary: Colors.blue,
+          inactiveColorPrimary: Colors.grey,
+        ),
+        PersistentBottomNavBarItem(
+          icon: const Icon(Icons.insert_emoticon),
+          title: ("Mine"),
+          activeColorPrimary: Colors.blue,
+          inactiveColorPrimary: Colors.grey,
+        ),
+        PersistentBottomNavBarItem(
           icon: const Icon(Icons.settings),
-          title: ("Settings"),
+          title: ("Setting"),
           activeColorPrimary: Colors.blue,
           inactiveColorPrimary: Colors.grey,
         ),

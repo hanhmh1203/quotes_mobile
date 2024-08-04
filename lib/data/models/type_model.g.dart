@@ -43,7 +43,15 @@ const QuoteTypeModelSchema = CollectionSchema(
       ],
     )
   },
-  links: {},
+  links: {
+    r'quotes': LinkSchema(
+      id: -3286538582703853060,
+      name: r'quotes',
+      target: r'QuoteModel',
+      single: false,
+      linkName: r'quoteTypeModel',
+    )
+  },
   embeddedSchemas: {},
   getId: _quoteTypeModelGetId,
   getLinks: _quoteTypeModelGetLinks,
@@ -102,12 +110,13 @@ Id _quoteTypeModelGetId(QuoteTypeModel object) {
 }
 
 List<IsarLinkBase<dynamic>> _quoteTypeModelGetLinks(QuoteTypeModel object) {
-  return [];
+  return [object.quotes];
 }
 
 void _quoteTypeModelAttach(
     IsarCollection<dynamic> col, Id id, QuoteTypeModel object) {
   object.id = id;
+  object.quotes.attach(col, col.isar.collection<QuoteModel>(), r'quotes', id);
 }
 
 extension QuoteTypeModelByIndex on IsarCollection<QuoteTypeModel> {
@@ -489,7 +498,68 @@ extension QuoteTypeModelQueryObject
     on QueryBuilder<QuoteTypeModel, QuoteTypeModel, QFilterCondition> {}
 
 extension QuoteTypeModelQueryLinks
-    on QueryBuilder<QuoteTypeModel, QuoteTypeModel, QFilterCondition> {}
+    on QueryBuilder<QuoteTypeModel, QuoteTypeModel, QFilterCondition> {
+  QueryBuilder<QuoteTypeModel, QuoteTypeModel, QAfterFilterCondition> quotes(
+      FilterQuery<QuoteModel> q) {
+    return QueryBuilder.apply(this, (query) {
+      return query.link(q, r'quotes');
+    });
+  }
+
+  QueryBuilder<QuoteTypeModel, QuoteTypeModel, QAfterFilterCondition>
+      quotesLengthEqualTo(int length) {
+    return QueryBuilder.apply(this, (query) {
+      return query.linkLength(r'quotes', length, true, length, true);
+    });
+  }
+
+  QueryBuilder<QuoteTypeModel, QuoteTypeModel, QAfterFilterCondition>
+      quotesIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.linkLength(r'quotes', 0, true, 0, true);
+    });
+  }
+
+  QueryBuilder<QuoteTypeModel, QuoteTypeModel, QAfterFilterCondition>
+      quotesIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.linkLength(r'quotes', 0, false, 999999, true);
+    });
+  }
+
+  QueryBuilder<QuoteTypeModel, QuoteTypeModel, QAfterFilterCondition>
+      quotesLengthLessThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.linkLength(r'quotes', 0, true, length, include);
+    });
+  }
+
+  QueryBuilder<QuoteTypeModel, QuoteTypeModel, QAfterFilterCondition>
+      quotesLengthGreaterThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.linkLength(r'quotes', length, include, 999999, true);
+    });
+  }
+
+  QueryBuilder<QuoteTypeModel, QuoteTypeModel, QAfterFilterCondition>
+      quotesLengthBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.linkLength(
+          r'quotes', lower, includeLower, upper, includeUpper);
+    });
+  }
+}
 
 extension QuoteTypeModelQuerySortBy
     on QueryBuilder<QuoteTypeModel, QuoteTypeModel, QSortBy> {
