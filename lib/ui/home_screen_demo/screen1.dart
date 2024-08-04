@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'list_item.dart';
+import 'quote_item_widget.dart';
 
 class Screen1 extends StatelessWidget {
   const Screen1({super.key});
@@ -22,7 +22,7 @@ class Screen1 extends StatelessWidget {
         itemBuilder: (context, index) {
           // Lấy màu theo thứ tự từ danh sách colors
           final color = colors[index % colors.length];
-          return ListItem(color: color);
+          return QuoteItemWidget(color: color);
         },
       ),
     );

@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:quotes_mobile/ui/home_screen_demo/item_view_model.dart';
 
-class ListItem extends StatelessWidget {
+class QuoteItemWidget extends StatelessWidget {
   final Color color;
 
-  const ListItem({required this.color, super.key});
+
+  QuoteItemWidget({required this.color, super.key});
 
   @override
   Widget build(BuildContext context) {
+    QuoteViewModel itemVM = QuoteViewModel();
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -22,7 +25,7 @@ class ListItem extends StatelessWidget {
       ),
       margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
       padding: const EdgeInsets.all(10),
-      child: const Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
@@ -33,7 +36,10 @@ class ListItem extends StatelessWidget {
                   padding: EdgeInsets.only(left: 10),
                   child: Text(
                     'Type ',
-                    style: TextStyle(fontSize: 18, color: Color(0xff00008b),fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        fontSize: 18,
+                        color: Color(0xff00008b),
+                        fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
@@ -53,8 +59,11 @@ class ListItem extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(left: 5),
             child: Text(
-                '"\nWhere I am, I don\'t know, I\'ll never know, in the silence you don\'t know, you must go on, I can\'t go on, I\'ll go on."',
-                style: TextStyle(fontSize: 20, color: Color(0xff00008b),fontWeight: FontWeight.bold)),
+                itemVM.content,
+                style: TextStyle(
+                    fontSize: 20,
+                    color: Color(0xff00008b),
+                    fontWeight: FontWeight.bold)),
           ),
           SizedBox(height: 20),
           Align(
@@ -62,7 +71,10 @@ class ListItem extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.only(right: 15),
               child: Text('Samuel Beckett " ',
-                  style: TextStyle(fontSize: 18, color: Color(0xff00008b),fontWeight: FontWeight.bold )),
+                  style: TextStyle(
+                      fontSize: 18,
+                      color: Color(0xff00008b),
+                      fontWeight: FontWeight.bold)),
             ),
           ),
         ],

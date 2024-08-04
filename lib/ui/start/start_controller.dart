@@ -11,6 +11,7 @@ import 'package:quotes_mobile/ui/base_controller.dart';
 import '../../data/json_models/quote_json_model.dart';
 
 class StartController extends BaseController {
+  RxList<QuoteModel> quotes = RxList();
   @override
   Future<void> onReady() async {
     // TODO: implement onReady
@@ -29,13 +30,17 @@ class StartController extends BaseController {
 
   Future<void> loadDataQuote() async {
     QuoteRepository repository = Get.find();
-    await repository.loadQuotes();
+    var list = await repository.loadQuotes();
+    quotes.clear();
+    quotes.addAll(list);
   }
 
   Future<void> loadQuoteByType({required QuoteTypeModel typeModel}) async {
     QuoteRepository repository = Get.find();
     var list = await repository.loadQuotesByType(typeModel: typeModel);
-    print("loadQuoteByType list:${list.length}");
+    quotes.clear();
+    quotes.addAll(list);
+    // print("loadQuoteByType list:${list.length}");
   }
 
   Future<void> loadDataAuthor() async {
@@ -45,6 +50,6 @@ class StartController extends BaseController {
 
   Future<void> loadDataType() async {
     TypeRepository repository = Get.find();
-    await repository.loadTypes();
+    var list = await repository.loadTypes();
   }
 }
