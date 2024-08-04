@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'app_routes.dart';
-import 'bottom_menu/bottom_nav_bar.dart';
+import 'bottom_menu/bottom_nav_bar_screen.dart';
 import 'start/start_page.dart';
 
 class EnsureAuthenticatedMiddleware extends GetMiddleware {
@@ -20,7 +20,7 @@ class RouteGenerator {
   static List<GetPage> routes = [
     GetPage(
         name: AppRoutes.startScreen,
-        page: () => const BottomNavBar(),
+        page: () => const BottomNavBarScreen(),
         transition: Transition.rightToLeftWithFade,
         binding: BindingsBuilder(() {
           Get.put(StartController());

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
@@ -7,7 +8,7 @@ import 'package:quotes_mobile/core/Constants.dart';
 import 'package:quotes_mobile/data/models/author_model.dart';
 import 'package:quotes_mobile/data/models/quote_model.dart';
 import 'package:quotes_mobile/data/models/type_model.dart';
-import 'package:quotes_mobile/ui/bottom_menu/bottom_nav_bar.dart';
+import 'package:quotes_mobile/ui/bottom_menu/bottom_nav_bar_screen.dart';
 import 'package:quotes_mobile/ui/route_generator.dart';
 
 import 'core/app_binding.dart';
@@ -15,15 +16,27 @@ import 'ui/init_app_helper.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
   final dir = await getApplicationDocumentsDirectory();
   final isar = await Isar.open(
     [AuthorModelSchema, QuoteModelSchema, QuoteTypeModelSchema],
     directory: dir.path,
   );
-  runApp(MyApp(
-    initRoute: AppInitHelper.getStartRoute(),
-    isar: isar,
-  ));
+  runApp(
+    EasyLocalization(
+        supportedLocales: [Locale('en', 'US'), Locale('vi', 'VI')],
+        path: 'assets/translations',
+        // <-- change the path of the translation files
+        fallbackLocale: Locale('en', 'US'),
+        child: MyApp(
+          initRoute: AppInitHelper.getStartRoute(),
+          isar: isar,
+        )),
+  );
+  // runApp(MyApp(
+  //   initRoute: AppInitHelper.getStartRoute(),
+  //   isar: isar,
+  // ));
 }
 
 class MyApp extends StatelessWidget {
@@ -37,6 +50,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
       title: Constants.appName,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
