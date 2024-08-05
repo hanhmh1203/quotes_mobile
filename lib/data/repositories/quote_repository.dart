@@ -28,7 +28,6 @@ class QuoteRepository extends BaseRepository{
     final quotes = await isar.quoteModels.where().findAll();
     print("--- loadQuotes quotes lengh: ${quotes.length}");
     for (var quote in quotes) {
-
       quote.author.loadSync();
       quote.quoteTypeModel.loadSync();
 

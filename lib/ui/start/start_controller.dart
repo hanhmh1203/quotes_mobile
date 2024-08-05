@@ -16,6 +16,7 @@ class StartController extends BaseController {
   Future<void> onReady() async {
     // TODO: implement onReady
     super.onReady();
+    loadDataQuote();
     // parseJson();
   }
 

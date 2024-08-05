@@ -43,4 +43,7 @@ class QuoteModel {
     this.isFavorite = false, // Default value is false
     this.isMine = false, // Default value is false
   });
+  String getKey() {
+    return "$content-${author.value?.name}";
+  }
 }

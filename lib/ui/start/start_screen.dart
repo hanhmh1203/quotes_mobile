@@ -29,7 +29,7 @@ class StartScreen extends GetView<StartController> {
             itemBuilder: (context, index) {
               // Lấy màu theo thứ tự từ danh sách colors
               final color = colors[index % colors.length];
-              return QuoteItemWidget(color: color);
+              return QuoteItemWidget(color: color, itemVM: controller.quotes[index],);
             },
           );
         },
@@ -37,18 +37,3 @@ class StartScreen extends GetView<StartController> {
     );
   }
 }
-
-// return Scaffold(
-// appBar: AppBar(
-// title: const Text('Custom List Screen'),
-// ),
-// body: ListView.builder(
-// itemCount:4, // Số lượng item trong danh sách
-// itemBuilder: (context, index) {
-// // Lấy màu theo thứ tự từ danh sách colors
-// final color = colors[index % colors.length];
-// return QuoteItemWidget(color: color);
-// },
-// ),
-// );
-// }
