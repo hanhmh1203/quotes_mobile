@@ -35,6 +35,26 @@ class QuoteRepository extends BaseRepository {
     }
   }
 
+  Future<List<QuoteModel>> loadQuotesFav() async {
+    final quotes = await isar.quoteModels.filter().isFavoriteEqualTo(true).findAll();
+    print("--- loadQuotes quotes lengh: ${quotes.length}");
+    for (var quote in quotes) {
+      quote.author.loadSync();
+      quote.quoteTypeModel.loadSync();
+
+      // Assign linked data to temporary variables for easy access
+      quote.tempQuoteTypes = quote.quoteTypeModel.toList();
+
+      // Print or use the data as needed
+      print('Quote: ${quote.content}');
+      // print('Author: ${quote.tempAuthor?.name}');
+      print('quote.author: ${quote.author.value?.name ?? "null"}');
+      print(
+          'Quote Types: ${quote.tempQuoteTypes.map((type) => type.type).join(', ')}');
+    }
+
+    return quotes;
+  }
   Future<List<QuoteModel>> loadQuotes() async {
     final quotes = await isar.quoteModels.where().findAll();
     print("--- loadQuotes quotes lengh: ${quotes.length}");
