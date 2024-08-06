@@ -6,7 +6,7 @@ import 'package:quotes_mobile/data/repositories/BaseRepository.dart';
 import '../json_models/quote_json_model.dart';
 import '../models/quote_model.dart';
 
-class QuoteRepository extends BaseRepository{
+class QuoteRepository extends BaseRepository {
   late Isar isar;
 
   QuoteRepository({required this.isar});
@@ -22,6 +22,17 @@ class QuoteRepository extends BaseRepository{
       isar.authorModels.clearSync();
       isar.quoteTypeModels.clearSync();
     });
+  }
+
+  saveQuoteFav(bool isFav, int id) async {
+    QuoteModel? quoteModel =
+        await isar.quoteModels.where().idEqualTo(id).findFirst();
+    if (quoteModel != null) {
+      quoteModel.isFavorite = isFav;
+      isar.writeTxnSync(() {
+        isar.quoteModels.putSync(quoteModel);
+      });
+    }
   }
 
   Future<List<QuoteModel>> loadQuotes() async {
@@ -46,13 +57,14 @@ class QuoteRepository extends BaseRepository{
     print("--- loadQuotes authors lengh: ${authors.length}");
     return quotes;
   }
-  Future<List<QuoteModel>> loadQuotesByType({required QuoteTypeModel typeModel}) async {
+
+  Future<List<QuoteModel>> loadQuotesByType(
+      {required QuoteTypeModel typeModel}) async {
     typeModel.quotes.loadSync();
     return typeModel.quotes.toList();
     final quotes = await isar.quoteModels.where().findAll();
     print("--- loadQuotes quotes lengh: ${quotes.length}");
     for (var quote in quotes) {
-
       quote.author.loadSync();
       quote.quoteTypeModel.loadSync();
 

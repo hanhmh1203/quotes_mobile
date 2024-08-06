@@ -56,7 +56,20 @@ class QuoteItemWidget extends StatelessWidget {
                     Expanded(
                       flex: 1,
                       // Chiếm 15% diện tích (30% còn lại chia đều cho hai cột)
-                      child: Icon(Icons.favorite, color: Color(0xff00008b)),
+                      child: Obx(
+                        () => IconButton(
+                          icon: Icon(
+                            Icons.favorite,
+                            color: controller.quoteVM.isFav.value
+                                ? Color(0xffE55200)
+                                : Color(0xff00008b),
+                          ),
+                          onPressed: () {
+                            // Your onPressed function here
+                            controller.toggleFavorite();
+                          },
+                        ),
+                      ),
                     ),
                     Expanded(
                       flex: 1,

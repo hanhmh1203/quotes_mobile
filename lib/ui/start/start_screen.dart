@@ -21,19 +21,33 @@ class StartScreen extends GetView<StartController> {
         title: const Text('app_name').tr(),
       ),
       drawer: LeftMenuScreen(), // Sử dụng CustomDrawer
-      body: Obx(
-        () {
-          return ListView.builder(
-            itemCount: controller.quotes.length,
-            // Số lượng item trong danh sách
-            itemBuilder: (context, index) {
-              // Lấy màu theo thứ tự từ danh sách colors
-              final color = colors[index % colors.length];
-              return QuoteItemWidget(color: color, itemVM: controller.quotes[index],);
+      body: Column(
+        children: [
+          ElevatedButton(
+            onPressed: () {
+              controller.loadDataQuote();
             },
-          );
-        },
-      ),
+            child: Text("click"),
+          ),
+          Expanded( // Wrap ListView.builder with Expanded to avoid layout issues
+            child: Obx(
+                  () {
+                return ListView.builder(
+                  itemCount: controller.quotes.length, // Number of items in the list
+                  itemBuilder: (context, index) {
+                    // Get color in order from the colors list
+                    final color = colors[index % colors.length];
+                    return QuoteItemWidget(
+                      color: color,
+                      itemVM: controller.quotes[index],
+                    );
+                  },
+                );
+              },
+            ),
+          ),
+        ],
+      )
     );
   }
 }

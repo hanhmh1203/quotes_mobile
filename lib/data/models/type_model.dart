@@ -15,6 +15,12 @@ class QuoteTypeModel {
 
   @override
   String toString() {
-    return 'QuoteTypeModel{id: $id, type: $type}';
+    return 'QuoteTypeModel{id: $id, type: $type, quotes: $quotes}';
   }
+
+// @override
+  // String toString() {
+  //   return 'QuoteTypeModel{id: $id, type: $type}';
+  // }
+
 }
