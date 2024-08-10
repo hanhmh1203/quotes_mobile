@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
+import 'package:quotes_mobile/ui/demo_dialog/dialog_screen.dart';
+import 'package:quotes_mobile/ui/home_screen_demo/screen1.dart';
 import 'package:quotes_mobile/ui/mine/mine_page.dart';
 import 'package:quotes_mobile/ui/random/random_page.dart';
 
@@ -15,11 +17,14 @@ class BottomNavBarScreen extends StatelessWidget {
     // Hàm này tạo danh sách các màn hình sẽ được hiển thị khi nhấn vào các mục của thanh điều hướng
     List<Widget> _buildScreens() {
       return [
-        const StartScreen(),
-        const FavouriteScreen(),
+        // const StartScreen(),
+        // const FavouriteScreen(),
+        const Screen1(),
+        const DialogScreen(),
         const RandomScreen(),
         const MineScreen(),
         const SettingScreen(),
+
       ];
     }
 
