@@ -18,9 +18,8 @@ class StartController extends BaseController {
   SharedUtils sharedUtils = Get.find();
 
   @override
-  Future<void> onReady() async {
-    // TODO: implement onReady
-    super.onReady();
+  Future<void> onInit() async {
+    // TODO: implement onInit
     if (!await sharedUtils.isDBInit()) {
       LogHelper.showLog(
           className: 'StartController',
@@ -29,11 +28,14 @@ class StartController extends BaseController {
       await parseJson();
       await sharedUtils.saveDBInit(true);
     }
-    // await parseJson();
+    super.onInit();
+  }
 
+  @override
+  Future<void> onReady() async {
+    // TODO: implement onReady
+    super.onReady();
     loadDataQuote();
-    // loadDataQuote();
-    // parseJson();
   }
 
   Future<void> parseJson() async {
@@ -48,17 +50,14 @@ class StartController extends BaseController {
     QuoteRepository repository = Get.find();
     var list = await repository.loadQuotes();
     quotes.clear();
-    print("hanhmh1203 loadDataQuote:${quotes.length}");
     quotes.addAll(list);
   }
 
   Future<void> loadQuoteByType({required QuoteTypeModel typeModel}) async {
-    print("hanhmh1203 loadQuoteByType:${typeModel}");
     QuoteRepository repository = Get.find();
     var list = await repository.loadQuotesByType(typeModel: typeModel);
     quotes.clear();
     quotes.addAll(list);
-    // print("loadQuoteByType list:${list.length}");
   }
 
   Future<void> loadDataAuthor() async {
