@@ -17,10 +17,10 @@ class BottomNavBarScreen extends StatelessWidget {
     // Hàm này tạo danh sách các màn hình sẽ được hiển thị khi nhấn vào các mục của thanh điều hướng
     List<Widget> _buildScreens() {
       return [
-        // const StartScreen(),
-        // const FavouriteScreen(),
-        const Screen1(),
-        const DialogScreen(),
+        const StartScreen(),
+        const FavouriteScreen(),
+        // const Screen1(),
+        // const DialogScreen(),
         const RandomScreen(),
         const MineScreen(),
         const SettingScreen(),
