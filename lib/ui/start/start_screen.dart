@@ -17,37 +17,41 @@ class StartScreen extends GetView<StartController> {
     // TODO: implement build
     // controller.parseJson();
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('app_name').tr(),
-      ),
-      drawer: LeftMenuScreen(), // Sử dụng CustomDrawer
-      body: Column(
-        children: [
-          ElevatedButton(
-            onPressed: () {
-              controller.loadDataQuote();
-            },
-            child: Text("click"),
-          ),
-          Expanded( // Wrap ListView.builder with Expanded to avoid layout issues
-            child: Obx(
-                  () {
-                return ListView.builder(
-                  itemCount: controller.quotes.length, // Number of items in the list
-                  itemBuilder: (context, index) {
-                    // Get color in order from the colors list
-                    final color = colors[index % colors.length];
-                    return QuoteItemWidget(
-                      color: color,
-                      itemVM: controller.quotes[index],
-                    );
-                  },
-                );
+        appBar: AppBar(
+          title: Obx(() => Text('${controller.title.value}').tr()),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.refresh),
+              onPressed: () {
+                controller.loadDataQuote();
+                // Add your refresh logic here
               },
             ),
-          ),
-        ],
-      )
-    );
+          ],
+        ),
+        drawer: LeftMenuScreen(), // Sử dụng CustomDrawer
+        body: Column(
+          children: [
+            Expanded(
+              // Wrap ListView.builder with Expanded to avoid layout issues
+              child: Obx(
+                () {
+                  return ListView.builder(
+                    itemCount: controller.quotes.length,
+                    // Number of items in the list
+                    itemBuilder: (context, index) {
+                      // Get color in order from the colors list
+                      final color = colors[index % colors.length];
+                      return QuoteItemWidget(
+                        color: color,
+                        itemVM: controller.quotes[index],
+                      );
+                    },
+                  );
+                },
+              ),
+            ),
+          ],
+        ));
   }
 }

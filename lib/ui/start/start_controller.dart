@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:get/get.dart';
 import 'package:get/get_instance/get_instance.dart';
+import 'package:get/get_rx/get_rx.dart';
 import 'package:quotes_mobile/core/log_helper.dart';
 import 'package:quotes_mobile/core/read_json_helper.dart';
 import 'package:quotes_mobile/core/shared_utils.dart';
@@ -15,7 +17,20 @@ import '../../data/json_models/quote_json_model.dart';
 
 class StartController extends BaseController {
   RxList<QuoteModel> quotes = RxList();
+  RxString title = tr("app_name").obs;
   SharedUtils sharedUtils = Get.find();
+
+  @override
+  void onClose() {
+    // TODO: implement onClose
+    quotes.close();
+    title.close();
+    super.onClose();
+  }
+
+  setTitle(String value) {
+    title.value = value;
+  }
 
   @override
   Future<void> onInit() async {
@@ -47,6 +62,7 @@ class StartController extends BaseController {
   }
 
   Future<void> loadDataQuote() async {
+    setTitle(tr("app_name"));
     QuoteRepository repository = Get.find();
     var list = await repository.loadQuotes();
     quotes.clear();

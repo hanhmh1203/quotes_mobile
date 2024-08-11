@@ -45,6 +45,7 @@ class LeftMenuController extends BaseController {
   }
   clickItem({required QuoteTypeModel typeModel}){
     StartController controller = Get.find();
+    controller.setTitle(typeModel.type);
     controller.loadQuoteByType(typeModel: typeModel);
   }
 }
