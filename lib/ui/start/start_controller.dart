@@ -21,14 +21,16 @@ class StartController extends BaseController {
   Future<void> onReady() async {
     // TODO: implement onReady
     super.onReady();
-    // if(!sharedUtils.isDBInit()){
-    //   await  parseJson();
-    // }
-    await  parseJson();
-    LogHelper.showLog(
-        className: 'StartController',
-        funcName: 'onReady',
-        message: 'sharedUtils.isDBInit');
+    if (!await sharedUtils.isDBInit()) {
+      LogHelper.showLog(
+          className: 'StartController',
+          funcName: 'onReady',
+          message: 'sharedUtils.isDBInit = false');
+      await parseJson();
+      await sharedUtils.saveDBInit(true);
+    }
+    // await parseJson();
+
     loadDataQuote();
     // loadDataQuote();
     // parseJson();

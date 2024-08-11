@@ -15,7 +15,7 @@ class StartScreen extends GetView<StartController> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    controller.parseJson();
+    // controller.parseJson();
     return Scaffold(
       appBar: AppBar(
         title: const Text('app_name').tr(),
