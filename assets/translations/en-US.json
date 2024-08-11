@@ -1,5 +1,6 @@
 {
   "app_name":"Quotes",
   "author":"Author",
-  "quote_type":"Type"
+  "quote_type":"Type",
+  "mine":"Mine"
 }

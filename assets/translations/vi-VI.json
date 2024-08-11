@@ -1,5 +1,6 @@
 {
   "app_name":"Quotes",
-  "author":"Ta giả",
-  "quote_type":"Thể loại"
+  "author":"Tác giả",
+  "quote_type":"Thể loại",
+  "mine":"Của Tôi"
 }
