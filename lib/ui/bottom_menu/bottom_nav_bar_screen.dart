@@ -19,7 +19,7 @@ class BottomNavBarScreen extends StatelessWidget {
       return [
         const StartScreen(),
         const FavouriteScreen(),
-        // const Screen1(),
+        const Screen1(),
         // const DialogScreen(),
         const RandomScreen(),
         const MineScreen(),
