@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 import 'package:get/get_instance/get_instance.dart';
 import 'package:quotes_mobile/core/read_json_helper.dart';
+import 'package:quotes_mobile/core/shared_utils.dart';
+import 'package:quotes_mobile/data/models/author_model.dart';
 import 'package:quotes_mobile/data/models/quote_model.dart';
 import 'package:quotes_mobile/data/models/type_model.dart';
 import 'package:quotes_mobile/data/repositories/author_repository.dart';
@@ -12,16 +14,21 @@ import '../../data/json_models/quote_json_model.dart';
 
 class StartController extends BaseController {
   RxList<QuoteModel> quotes = RxList();
+  SharedUtils sharedUtils = Get.find();
   @override
   Future<void> onReady() async {
     // TODO: implement onReady
     super.onReady();
+    if(!sharedUtils.isDBInit()){
+      await  parseJson();
+    }
+    loadDataQuote();
+    // loadDataQuote();
     // parseJson();
   }
 
   Future<void> parseJson() async {
     List<QuoteJsonModel> data = await ReadJsonFileHelper.readDummyData();
-
     QuoteRepository repository = Get.find();
     repository.clearAllData();
     repository.saveQuoteSync(data);
@@ -32,10 +39,13 @@ class StartController extends BaseController {
     QuoteRepository repository = Get.find();
     var list = await repository.loadQuotes();
     quotes.clear();
+    print("hanhmh1203 loadDataQuote:${quotes.length}");
     quotes.addAll(list);
+
   }
 
   Future<void> loadQuoteByType({required QuoteTypeModel typeModel}) async {
+    print("hanhmh1203 loadQuoteByType:${typeModel}");
     QuoteRepository repository = Get.find();
     var list = await repository.loadQuotesByType(typeModel: typeModel);
     quotes.clear();
