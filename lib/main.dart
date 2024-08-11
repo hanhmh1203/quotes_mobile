@@ -55,6 +55,14 @@ class MyApp extends StatelessWidget {
       locale: context.locale,
       title: Constants.appName,
       theme: ThemeData(
+        drawerTheme: const DrawerThemeData(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              topRight: Radius.circular(0),
+              bottomRight: Radius.circular(0),
+            ),
+          ),
+        ),
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),

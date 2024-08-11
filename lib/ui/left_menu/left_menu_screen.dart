@@ -48,6 +48,7 @@ class LeftMenuScreen extends GetView<LeftMenuController> {
                         // StartController controller = Get.find();
                         controller.clickItem(
                             typeModel: controller.types[index]);
+                        // Get.back();
                         Navigator.pop(context);
                         // Close drawer when an item is tapped
                         // Handle onTap event here!

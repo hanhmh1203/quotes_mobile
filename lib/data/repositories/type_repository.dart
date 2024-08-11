@@ -19,10 +19,10 @@ class TypeRepository {
 
   Future<List<QuoteTypeModel>> loadTypes() async {
     final types = await isar.quoteTypeModels.where().findAll();
-    for (var type in types) {
-      type.quotes.loadSync();
-      print('Quote Types: ${type.quotes.map((a) => a.content).join(', ')}');
-    }
+    // for (var type in types) {
+    //   type.quotes.loadSync();
+    //   print('Quote Types: ${type.quotes.map((a) => a.content).join(', ')}');
+    // }
     return types;
   }
 }
