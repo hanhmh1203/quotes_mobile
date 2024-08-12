@@ -15,8 +15,8 @@ class AppBinding extends Bindings {
   @override
   Future<void> dependencies() async {
     // TODO: implement dependencies
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    Get.lazyPut(() => SharedUtils(prefs: sharedPreferences));
+    // SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    Get.put(SharedUtils());
     Get.put(AuthorRepository(isar: isar));
     Get.put(QuoteRepository(isar: isar));
     Get.put(TypeRepository(isar: isar));

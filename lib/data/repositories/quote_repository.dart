@@ -3,6 +3,7 @@ import 'package:quotes_mobile/data/models/author_model.dart';
 import 'package:quotes_mobile/data/models/type_model.dart';
 import 'package:quotes_mobile/data/repositories/BaseRepository.dart';
 
+import '../../core/log_helper.dart';
 import '../json_models/quote_json_model.dart';
 import '../models/quote_model.dart';
 
@@ -12,11 +13,6 @@ class QuoteRepository extends BaseRepository {
   QuoteRepository({required this.isar});
 
   void clearAllData() async {
-    // await isar.writeTxn(() async {
-    //   await isar.quoteModels.clear();
-    //   await isar.authorModels.clear();
-    //   await isar.quoteTypeModels.clear();
-    // });
     isar.writeTxnSync(() {
       isar.quoteModels.clearSync();
       isar.authorModels.clearSync();

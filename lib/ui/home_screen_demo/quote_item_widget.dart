@@ -31,22 +31,33 @@ class QuoteItemWidget extends StatelessWidget {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
               ),
-              borderRadius: BorderRadius.circular(5),
+              borderRadius: BorderRadius.circular(8),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.2),
+                  // Shadow color with opacity
+                  spreadRadius: 2,
+                  // How much the shadow spreads
+                  blurRadius: 2,
+                  // Softness of the shadow
+                  offset: const Offset(0, 2), // Offset of the shadow (x, y)
+                ),
+              ],
             ),
             margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
             padding: const EdgeInsets.all(10),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Row(
                   children: [
                     Expanded(
                       flex: 7, // Chiếm 70% diện tích
                       child: Padding(
-                        padding: EdgeInsets.only(left: 10),
+                        padding: const EdgeInsets.only(left: 10),
                         child: Text(
                           controller.quoteVM.type,
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 18,
                               color: Color(0xff00008b),
                               fontWeight: FontWeight.bold),
@@ -61,8 +72,8 @@ class QuoteItemWidget extends StatelessWidget {
                           icon: Icon(
                             Icons.favorite,
                             color: controller.quoteVM.isFav.value
-                                ? Color(0xffE55200)
-                                : Color(0xff00008b),
+                                ? const Color(0xffE55200)
+                                : const Color(0xff00008b),
                           ),
                           onPressed: () {
                             // Your onPressed function here
@@ -71,30 +82,63 @@ class QuoteItemWidget extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Expanded(
+                    const Expanded(
                       flex: 1,
                       // Chiếm 15% diện tích (30% còn lại chia đều cho hai cột)
                       child: Icon(Icons.share, color: Color(0xff00008b)),
                     ),
                   ],
                 ),
-                SizedBox(height: 30),
-                Padding(
-                  padding: EdgeInsets.only(left: 5),
-                  child: Text(controller.quoteVM.content,
-                      style: TextStyle(
-                          fontSize: 20,
-                          color: Color(0xff00008b),
-                          fontWeight: FontWeight.bold)),
+                const SizedBox(height: 16),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 4),
+                      child: Image.asset(
+                        "assets/images/daunhay.png",
+                        width: 40,
+                        height: 40,
+                        color: const Color(
+                            0xff00008b), // Điều chỉnh chiều cao cho phù hợp
+                      ),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 5),
+                            child: Text(controller.quoteVM.content,
+                                style: const TextStyle(
+                                    fontSize: 20,
+                                    color: Color(0xff00008b),
+                                    fontWeight: FontWeight.bold)),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(width: 4),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 4.0),
+                      child: Image.asset(
+                        "assets/images/daunhay_dong.png",
+                        width: 40,
+                        height: 40,
+                        color: const Color(0xff00008b),
+                      ),
+                    ),
+                  ],
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 8),
                 Align(
                   alignment: Alignment.centerRight,
                   child: Padding(
-                    padding: EdgeInsets.only(right: 15),
-                    child: Text(controller.quoteVM.author,
-                        style: TextStyle(
-                            fontSize: 18,
+                    padding: const EdgeInsets.only(right: 15),
+                    child: Text(' - ${controller.quoteVM.author} -',
+                        style: const TextStyle(
+                            fontSize: 20,
                             color: Color(0xff00008b),
                             fontWeight: FontWeight.bold)),
                   ),
