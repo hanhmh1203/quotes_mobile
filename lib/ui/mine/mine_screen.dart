@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 
 import '../../core/colors_type.dart';
+import '../demo_dialog/dialog_helper.dart';
 import '../home_screen_demo/quote_item_widget.dart';
 import 'mine_page.dart';
 
@@ -52,6 +53,14 @@ class MineScreen extends GetView<MineController> {
               ),
             ),
           ],
-        ));
+        ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          DialogHelper dialogHelper = DialogHelper();
+          dialogHelper.openDialog(context);
+        },
+        child: Icon(Icons.add),
+      ),
+    );
   }
 }

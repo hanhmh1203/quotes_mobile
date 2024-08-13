@@ -78,9 +78,7 @@ class DialogHelper {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     TextButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
+                      onPressed: () => Get.back(),
                       child: const Text(
                         'Cancel',
                         style: TextStyle(
