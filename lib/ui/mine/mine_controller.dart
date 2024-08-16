@@ -1,30 +1,23 @@
 import 'package:get/get.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
-import 'package:quotes_mobile/ui/base_controller.dart';
+import 'package:quotes_mobile/ui/mine/demo_crud_mine/database_helper.dart';
+import 'package:quotes_mobile/ui/mine/demo_crud_mine/quote_model.dart';
 
-import '../../data/models/quote_model.dart';
-import '../../data/repositories/quote_repository.dart';
-
-class MineController extends BaseController{
-  RxList<QuoteModel> quotes = RxList();
+class MineController extends GetxController {
+  var quotes = <QuoteModel>[].obs;
 
   @override
-  Future<void> onReady() async {
-    // TODO: implement onReady
-    super.onReady();
-    // loadDataQuote();
-    // parseJson();
+  void onInit() {
+    super.onInit();
+    _loadQuotes();
   }
-  Future<void> loadDataQuote() async {
-    QuoteRepository repository = Get.find();
-    var list = await repository.loadQuotesFav();
-    quotes.clear();
-    quotes.addAll(list);
+
+  Future<void> _loadQuotes() async {
+    final data = await DatabaseHelper().getQuotes();
+    quotes.value = data.map((item) => QuoteModel.fromMap(item)).toList();
   }
-  @override
-  void onClose() {
-    // TODO: implement onClose
-    quotes.close();
-    super.onClose();
+
+  Future<void> addQuote(QuoteModel quote) async {
+    await DatabaseHelper().insertQuote(quote.quote, quote.author, quote.type);
+    _loadQuotes();
   }
 }
