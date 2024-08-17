@@ -3,7 +3,7 @@ import 'package:quotes_mobile/ui/mine/demo_crud_mine/quote_model.dart';
 
 class QuoteItemWidget extends StatelessWidget {
   final Color color;
-  final QuoteModel itemVM;
+  final QuoteMineModel itemVM;
 
   const QuoteItemWidget({
     required this.color,

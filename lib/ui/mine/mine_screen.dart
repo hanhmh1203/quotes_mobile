@@ -1,10 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:quotes_mobile/ui/mine/demo_crud_mine/quote_item_widget_input.dart';
 import '../../core/colors_type.dart';
 import '../demo_dialog/dialog_helper.dart';
 
+import '../home_screen_demo/quote_item_widget.dart';
 import 'mine_controller.dart';
 
 class MineScreen extends GetView<MineController> {
@@ -46,7 +46,7 @@ class MineScreen extends GetView<MineController> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          DialogHelper().openDialog(context);
+          DialogHelper().openDialog(context, controller.addQuote);
         },
         child: const Icon(Icons.add),
       ),

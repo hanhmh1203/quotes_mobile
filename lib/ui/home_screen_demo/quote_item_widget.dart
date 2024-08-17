@@ -64,24 +64,25 @@ class QuoteItemWidget extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Expanded(
-                      flex: 1,
-                      // Chiếm 15% diện tích (30% còn lại chia đều cho hai cột)
-                      child: Obx(
-                        () => IconButton(
-                          icon: Icon(
-                            Icons.favorite,
-                            color: controller.quoteVM.isFav.value
-                                ? const Color(0xffE55200)
-                                : const Color(0xff00008b),
+                    if (!itemVM.isMine)
+                      Expanded(
+                        flex: 1,
+                        // Chiếm 15% diện tích (30% còn lại chia đều cho hai cột)
+                        child: Obx(
+                          () => IconButton(
+                            icon: Icon(
+                              Icons.favorite,
+                              color: controller.quoteVM.isFav.value
+                                  ? const Color(0xffE55200)
+                                  : const Color(0xff00008b),
+                            ),
+                            onPressed: () {
+                              // Your onPressed function here
+                              controller.toggleFavorite();
+                            },
                           ),
-                          onPressed: () {
-                            // Your onPressed function here
-                            controller.toggleFavorite();
-                          },
                         ),
                       ),
-                    ),
                     const Expanded(
                       flex: 1,
                       // Chiếm 15% diện tích (30% còn lại chia đều cho hai cột)

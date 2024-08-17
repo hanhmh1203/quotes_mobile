@@ -21,17 +21,17 @@ class _DialogScreenState extends State<DialogScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ElevatedButton(
-              onPressed: () {
-                DialogHelper dialogHelper = DialogHelper();
-                dialogHelper.openDialog(context);
-              },
-              child: const Icon(Icons.add),
-              style: ElevatedButton.styleFrom(
-                shape: const CircleBorder(),
-                padding: const EdgeInsets.all(20),
-              ),
-            ),
+            // ElevatedButton(
+            //   onPressed: () {
+            //     DialogHelper dialogHelper = DialogHelper();
+            //     dialogHelper.openDialog(context);
+            //   },
+            //   child: const Icon(Icons.add),
+            //   style: ElevatedButton.styleFrom(
+            //     shape: const CircleBorder(),
+            //     padding: const EdgeInsets.all(20),
+            //   ),
+            // ),
             const SizedBox(height: 20),
             // Display the saved values
           ],

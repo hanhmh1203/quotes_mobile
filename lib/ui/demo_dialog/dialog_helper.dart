@@ -7,7 +7,7 @@ import 'package:quotes_mobile/ui/mine/mine_controller.dart';
 class DialogHelper {
   final MineController controller = Get.find<MineController>();
 
-  void openDialog(BuildContext context) {
+  void openDialog(BuildContext context,Future<void> Function(QuoteMineModel model)  onConfirm ) {
     TextEditingController quoteController = TextEditingController();
     TextEditingController authorController = TextEditingController();
     TextEditingController typeController = TextEditingController();
@@ -86,12 +86,13 @@ class DialogHelper {
                     ),
                     TextButton(
                       onPressed: () async {
-                        final newQuote = QuoteModel(
+                        final newQuote = QuoteMineModel(
                           quote: quoteController.text,
                           type: typeController.text,
                           author: authorController.text,
                         );
-                        await controller.addQuote(newQuote);
+                        // await controller.addQuote(newQuote);
+                        await onConfirm(newQuote);
                         Get.back();
                       },
                       child: const Text(
