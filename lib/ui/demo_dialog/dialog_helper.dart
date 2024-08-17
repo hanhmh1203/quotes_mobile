@@ -1,16 +1,13 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:quotes_mobile/ui/mine/demo_crud_mine/quote_model.dart';
+import 'package:quotes_mobile/ui/mine/mine_controller.dart';
+
 
 class DialogHelper {
-  bool _showDialogInput = false;
+  final MineController controller = Get.find<MineController>();
 
-  void openDialog(BuildContext context) {
-    String? quote;
-    String? author;
-    String? type;
-
+  void openDialog(BuildContext context,Future<void> Function(QuoteMineModel model)  onConfirm ) {
     TextEditingController quoteController = TextEditingController();
     TextEditingController authorController = TextEditingController();
     TextEditingController typeController = TextEditingController();
@@ -78,9 +75,7 @@ class DialogHelper {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     TextButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
+                      onPressed: () => Get.back(),
                       child: const Text(
                         'Cancel',
                         style: TextStyle(
@@ -90,14 +85,15 @@ class DialogHelper {
                       ),
                     ),
                     TextButton(
-                      onPressed: () {
-                        // Save the input values to state variables
-                        quote = quoteController.text;
-                        author = authorController.text;
-                        type = typeController.text;
-                        print('qoute: $quote author: $author type : $type' );
-                        // Close the dialog
-                        // Navigator.of(context).pop();
+                      onPressed: () async {
+                        final newQuote = QuoteMineModel(
+                          quote: quoteController.text,
+                          type: typeController.text,
+                          author: authorController.text,
+                        );
+                        // await controller.addQuote(newQuote);
+                        await onConfirm(newQuote);
+                        Get.back();
                       },
                       child: const Text(
                         'Save',
