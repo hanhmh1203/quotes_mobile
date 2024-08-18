@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:path/path.dart';
 import 'package:quotes_mobile/data/models/quote_model.dart';
+import 'package:quotes_mobile/ui/demo_dialog/dialog_helper.dart';
+import 'package:quotes_mobile/ui/demo_dialog/dialog_helper_delete.dart';
 import 'package:quotes_mobile/ui/view_item/view_item_page.dart';
 
 import 'quote_item_controller.dart';
@@ -143,9 +146,10 @@ class QuoteItemMineWidget extends QuoteItemWidget {
           color: const Color(0xff00008b),
         ),
         onPressed: () {
-          // Your onPressed function here
-
-          controller.deleteQuote(itemVM.id);
+         DialogHelper.openDialogDelete(Get.context!,controller.deleteQuote,itemVM.id);
+          // DialogHelperDelete().openDialogDelete(controller.deleteQuote(
+          //         itemVM.id) // Thực hiện hành động xóa khi xác nhận
+          //     );
         },
       ),
     );
