@@ -7,6 +7,7 @@ import 'package:quotes_mobile/data/repositories/quote_repository.dart';
 import 'package:quotes_mobile/ui/base_controller.dart';
 import 'package:quotes_mobile/ui/mine/mine_controller.dart';
 import 'package:quotes_mobile/ui/view_item/view_item_page.dart';
+import 'package:share_plus/share_plus.dart';
 
 class QuoteItemController extends BaseController {
   QuoteViewModel quoteVM;
@@ -20,13 +21,16 @@ class QuoteItemController extends BaseController {
     await quoteRepository.saveQuoteFav(quoteVM.isFav.value, quoteVM.id);
   }
 
-  shareQuote() async {}
-
   deleteQuote(int id) async {
     LogHelper.showLog(message: "deletequote: $id");
     var result = await quoteRepository.deleteQuote(id);
     LogHelper.showLog(message: "deletequote result: $result");
     MineController mineController = Get.find();
     mineController.loadQuotes();
+  }
+
+  shareQuote() async {
+    final String quoteText = '"${quoteVM.content}" - ${quoteVM.author}';
+    await Share.share(quoteText);
   }
 }
