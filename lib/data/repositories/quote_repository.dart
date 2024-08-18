@@ -31,8 +31,15 @@ class QuoteRepository extends BaseRepository {
     }
   }
 
+  Future<bool> deleteQuote(int id) async {
+    return await isar.writeTxn(() async {
+      return await isar.quoteModels.delete(id);
+    });
+  }
+
   Future<List<QuoteModel>> loadQuotesFav() async {
-    final quotes = await isar.quoteModels.filter().isFavoriteEqualTo(true).findAll();
+    final quotes =
+        await isar.quoteModels.filter().isFavoriteEqualTo(true).findAll();
     print("--- loadQuotes quotes lengh: ${quotes.length}");
     for (var quote in quotes) {
       quote.author.loadSync();
@@ -51,6 +58,7 @@ class QuoteRepository extends BaseRepository {
 
     return quotes;
   }
+
   Future<List<QuoteModel>> loadQuotes() async {
     final quotes = await isar.quoteModels.where().findAll();
     for (var quote in quotes) {
@@ -64,8 +72,10 @@ class QuoteRepository extends BaseRepository {
     final authors = await isar.authorModels.where().findAll();
     return quotes;
   }
+
   Future<List<QuoteModel>> loadMyQuotes() async {
-    final quotes = await isar.quoteModels.filter().isMineEqualTo(true).findAll();
+    final quotes =
+        await isar.quoteModels.filter().isMineEqualTo(true).findAll();
     for (var quote in quotes) {
       quote.author.loadSync();
       quote.quoteTypeModel.loadSync();
@@ -75,6 +85,7 @@ class QuoteRepository extends BaseRepository {
     final authors = await isar.authorModels.where().findAll();
     return quotes;
   }
+
   Future<List<QuoteModel>> loadQuotesByType(
       {required QuoteTypeModel typeModel}) async {
     typeModel.quotes.loadSync();
@@ -147,44 +158,42 @@ class QuoteRepository extends BaseRepository {
   Future<void> saveAQuote(QuoteModel model) async {
     // var data = list.map((e) => QuoteModel.fromJsonModel(e)).toList();
     // for (var e in data) {
-      var e = model;
-      var dbItem =
-      await isar.quoteModels.where().contentEqualTo(e.content).findFirst();
-      if (dbItem != null) {
-        // do not save this item.
-        return;
+    var e = model;
+    var dbItem =
+        await isar.quoteModels.where().contentEqualTo(e.content).findFirst();
+    if (dbItem != null) {
+      // do not save this item.
+      return;
+    }
+    if (e.tempAuthor != null) {
+      var author = await isar.authorModels
+          .where()
+          .nameEqualTo(e.tempAuthor!.name)
+          .findFirst();
+      if (author != null) {
+        e.author.value = author;
+      } else {
+        e.author.value = e.tempAuthor;
       }
-      if (e.tempAuthor != null) {
-        var author = await isar.authorModels
-            .where()
-            .nameEqualTo(e.tempAuthor!.name)
-            .findFirst();
-        if (author != null) {
-          e.author.value = author;
-        } else {
-          e.author.value = e.tempAuthor;
-        }
+    }
+    List<QuoteTypeModel> types = [];
+    for (var type in e.tempQuoteTypes) {
+      QuoteTypeModel inputType;
+      var first =
+          await isar.quoteTypeModels.where().typeEqualTo(type.type).findFirst();
+      if (first != null) {
+        inputType = first;
+        types.add(first);
+      } else {
+        inputType = type;
+        types.add(type);
       }
-      List<QuoteTypeModel> types = [];
-      for (var type in e.tempQuoteTypes) {
-        QuoteTypeModel inputType;
-        var first = await isar.quoteTypeModels
-            .where()
-            .typeEqualTo(type.type)
-            .findFirst();
-        if (first != null) {
-          inputType = first;
-          types.add(first);
-        } else {
-          inputType = type;
-          types.add(type);
-        }
-        e.quoteTypeModel.add(inputType);
-      }
-      // save all relation.
-      await isar.writeTxnSync(() async {
-        isar.quoteModels.putSync(e);
-      });
+      e.quoteTypeModel.add(inputType);
+    }
+    // save all relation.
+    await isar.writeTxnSync(() async {
+      isar.quoteModels.putSync(e);
+    });
     // }
   }
 

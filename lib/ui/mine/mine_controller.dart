@@ -12,15 +12,15 @@ class MineController extends BaseController {
   @override
   void onInit() {
     super.onInit();
-    _loadQuotes();
+    loadQuotes();
   }
   @override
   void onReady(){
     super.onReady();
-    _loadQuotes();
+    loadQuotes();
   }
 
-  Future<void> _loadQuotes() async {
+  Future<void> loadQuotes() async {
     // final data = await DatabaseHelper().getQuotes();
     // quotes.value = data.map((item) => QuoteMineModel.fromMap(item)).toList();
     List<QuoteModel> quotesDB = await quoteRepository.loadMyQuotes();
@@ -33,7 +33,7 @@ class MineController extends BaseController {
   Future<void> addQuote(QuoteMineViewModel quote) async {
     QuoteModel quoteModel = QuoteModel.fromMyInput(quote);
     await quoteRepository.saveAQuote(quoteModel);
-    _loadQuotes();
+    loadQuotes();
     // fromMyInput
     // await DatabaseHelper().insertQuote(quote.quote, quote.author, quote.type);
     // _loadQuotes();
