@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:quotes_mobile/ui/mine/demo_crud_mine/quote_model.dart';
+import 'package:quotes_mobile/ui/mine/quote_mine_view_model.dart';
 import 'package:quotes_mobile/ui/mine/mine_controller.dart';
 
 
 class DialogHelper {
   final MineController controller = Get.find<MineController>();
 
-  void openDialog(BuildContext context,Future<void> Function(QuoteMineModel model)  onConfirm ) {
+  void openDialog(BuildContext context,Future<void> Function(QuoteMineViewModel model)  onConfirm ) {
     TextEditingController quoteController = TextEditingController();
     TextEditingController authorController = TextEditingController();
     TextEditingController typeController = TextEditingController();
@@ -86,7 +86,7 @@ class DialogHelper {
                     ),
                     TextButton(
                       onPressed: () async {
-                        final newQuote = QuoteMineModel(
+                        final newQuote = QuoteMineViewModel(
                           quote: quoteController.text,
                           type: typeController.text,
                           author: authorController.text,

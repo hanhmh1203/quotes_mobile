@@ -1,11 +1,11 @@
 import 'package:quotes_mobile/data/models/quote_model.dart';
 
-class QuoteMineModel {
+class QuoteMineViewModel {
   final String quote;
   final String author;
   final String type;
 
-  QuoteMineModel({
+  QuoteMineViewModel({
     required this.quote,
     required this.author,
     required this.type,
@@ -19,16 +19,16 @@ class QuoteMineModel {
     };
   }
 
-  factory QuoteMineModel.fromMap(Map<String, dynamic> map) {
-    return QuoteMineModel(
+  factory QuoteMineViewModel.fromMap(Map<String, dynamic> map) {
+    return QuoteMineViewModel(
       quote: map['quote'],
       author: map['author'],
       type: map['type'],
     );
   }
 
-  factory QuoteMineModel.quoteModel(QuoteModel quote) {
-    return QuoteMineModel(
+  factory QuoteMineViewModel.quoteModel(QuoteModel quote) {
+    return QuoteMineViewModel(
       quote: quote.content,
       author: quote.author.value?.name ?? '',
       type: quote.quoteTypeModel.firstOrNull?.type ?? '',

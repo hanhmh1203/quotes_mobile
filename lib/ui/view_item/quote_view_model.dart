@@ -15,7 +15,7 @@ class QuoteViewModel {
     QuoteViewModel quoteViewModel = QuoteViewModel();
     quoteViewModel.id = quote.id;
     quoteViewModel.type =
-        '${quote.tempQuoteTypes.map((type) => type.type).join(', ')}';
+        quote.tempQuoteTypes.map((type) => type.type).join(', ');
     quoteViewModel.content = quote.content;
     quoteViewModel.isFav.value = quote.isFavorite;
     quoteViewModel.author = quote.author.value?.name ?? "author";

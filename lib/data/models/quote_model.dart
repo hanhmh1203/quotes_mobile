@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:isar/isar.dart';
 import 'package:quotes_mobile/data/json_models/quote_json_model.dart';
-import 'package:quotes_mobile/ui/mine/demo_crud_mine/quote_model.dart';
+import 'package:quotes_mobile/ui/mine/quote_mine_view_model.dart';
 
 import 'author_model.dart';
 import 'type_model.dart';
@@ -41,7 +41,7 @@ class QuoteModel {
     return model;
   }
 
-  factory QuoteModel.fromMyInput(QuoteMineModel mine) {
+  factory QuoteModel.fromMyInput(QuoteMineViewModel mine) {
     var model = QuoteModel(content: mine.quote);
 
     List<QuoteTypeModel> quoteTypes = [];

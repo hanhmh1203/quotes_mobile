@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:quotes_mobile/ui/left_menu/left_menu_page.dart';
 
 import '../../core/colors_type.dart';
-import '../home_screen_demo/quote_item_widget.dart';
+import '../view_item/view_item_page.dart';
 import 'start_page.dart';
 
 class StartScreen extends GetView<StartController> {
