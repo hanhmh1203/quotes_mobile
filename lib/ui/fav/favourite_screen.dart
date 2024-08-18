@@ -5,7 +5,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 
 import '../../core/colors_type.dart';
-import '../home_screen_demo/quote_item_widget.dart';
+import '../view_item/view_item_page.dart';
 import 'favourite_page.dart';
 
 class FavouriteScreen extends GetView<FavouriteController> {

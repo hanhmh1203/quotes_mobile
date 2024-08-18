@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
-import 'package:quotes_mobile/ui/demo_dialog/dialog_screen.dart';
-import 'package:quotes_mobile/ui/home_screen_demo/screen1.dart';
 import 'package:quotes_mobile/ui/mine/mine_page.dart';
 import 'package:quotes_mobile/ui/random/random_page.dart';
 
@@ -19,12 +17,9 @@ class BottomNavBarScreen extends StatelessWidget {
       return [
         const StartScreen(),
         const FavouriteScreen(),
-        // const Screen1(),
-        // const DialogScreen(),
         const RandomScreen(),
         const MineScreen(),
-        const SettingScreen(),
-
+        // const SettingScreen(),
       ];
     }
 
@@ -56,12 +51,12 @@ class BottomNavBarScreen extends StatelessWidget {
           activeColorPrimary: Colors.blue,
           inactiveColorPrimary: Colors.grey,
         ),
-        PersistentBottomNavBarItem(
-          icon: const Icon(Icons.settings),
-          title: ("Setting"),
-          activeColorPrimary: Colors.blue,
-          inactiveColorPrimary: Colors.grey,
-        ),
+        // PersistentBottomNavBarItem(
+        //   icon: const Icon(Icons.settings),
+        //   title: ("Setting"),
+        //   activeColorPrimary: Colors.blue,
+        //   inactiveColorPrimary: Colors.grey,
+        // ),
         // PersistentBottomNavBarItem(
         //   icon: const Icon(Icons.settings_outlined),
         //   title: ("Setting"),

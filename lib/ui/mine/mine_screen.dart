@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import '../../core/colors_type.dart';
 import '../demo_dialog/dialog_helper.dart';
 
-import '../home_screen_demo/quote_item_widget.dart';
+import '../view_item/view_item_page.dart';
 import 'mine_controller.dart';
 
 class MineScreen extends GetView<MineController> {

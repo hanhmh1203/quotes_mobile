@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quotes_mobile/data/models/quote_model.dart';
-import 'package:quotes_mobile/ui/home_screen_demo/item_view_model.dart';
-import 'package:quotes_mobile/ui/home_screen_demo/quote_item_controller.dart';
+
+import 'quote_item_controller.dart';
+import 'quote_view_model.dart';
 
 class QuoteItemWidget extends StatelessWidget {
   final Color color;

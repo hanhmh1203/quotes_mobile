@@ -3,8 +3,7 @@ import 'package:quotes_mobile/core/log_helper.dart';
 import 'package:quotes_mobile/data/models/quote_model.dart';
 import 'package:quotes_mobile/data/repositories/quote_repository.dart';
 import 'package:quotes_mobile/ui/base_controller.dart';
-import 'package:quotes_mobile/ui/mine/demo_crud_mine/database_helper.dart';
-import 'package:quotes_mobile/ui/mine/demo_crud_mine/quote_model.dart';
+import 'package:quotes_mobile/ui/mine/quote_mine_view_model.dart';
 
 class MineController extends BaseController {
   var quotes = <QuoteModel>[].obs;
@@ -31,7 +30,7 @@ class MineController extends BaseController {
   }
 
 
-  Future<void> addQuote(QuoteMineModel quote) async {
+  Future<void> addQuote(QuoteMineViewModel quote) async {
     QuoteModel quoteModel = QuoteModel.fromMyInput(quote);
     await quoteRepository.saveAQuote(quoteModel);
     _loadQuotes();
