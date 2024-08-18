@@ -84,11 +84,16 @@ class QuoteItemWidget extends StatelessWidget {
                           ),
                         ),
                       ),
-                    const Expanded(
-                      flex: 1,
-                      // Chiếm 15% diện tích (30% còn lại chia đều cho hai cột)
-                      child: Icon(Icons.share, color: Color(0xff00008b)),
-                    ),
+                    Expanded(
+                        flex: 1,
+                        // Chiếm 15% diện tích (30% còn lại chia đều cho hai cột)
+                        child: IconButton(
+                          onPressed: () {
+                            // Your onPressed function here
+                            controller.shareQuote();
+                          },
+                          icon: Icon(Icons.share, color: Color(0xff00008b)),
+                        )),
                   ],
                 ),
                 const SizedBox(height: 16),

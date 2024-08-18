@@ -15,4 +15,6 @@ class QuoteItemController extends BaseController {
     quoteVM.isFav.value = !quoteVM.isFav.value;
     await quoteRepository.saveQuoteFav(quoteVM.isFav.value, quoteVM.id);
   }
+  shareQuote() async {
+  }
 }
