@@ -20,16 +20,16 @@ class FavouriteScreen extends GetView<FavouriteController> {
     // TODO: implement build
     return Scaffold(
         appBar: AppBar(
-          title: const Text('app_name').tr(),
+          title: const Text('str_fav').tr(),
         ),
         body: Column(
           children: [
-            ElevatedButton(
-              onPressed: () {
-                controller.loadDataQuote();
-              },
-              child: Text("click"),
-            ),
+            // ElevatedButton(
+            //   onPressed: () {
+            //     controller.loadDataQuote();
+            //   },
+            //   child: Text("click"),
+            // ),
             Expanded(
               // Wrap ListView.builder with Expanded to avoid layout issues
               child: Obx(

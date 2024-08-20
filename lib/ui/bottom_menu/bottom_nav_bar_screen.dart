@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_instance/get_instance.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
+import 'package:quotes_mobile/core/log_helper.dart';
+import 'package:quotes_mobile/ui/fav/favourite_controller.dart';
 import 'package:quotes_mobile/ui/mine/mine_page.dart';
 import 'package:quotes_mobile/ui/random/random_page.dart';
 
@@ -69,7 +73,16 @@ class BottomNavBarScreen extends StatelessWidget {
     // Tạo bộ điều khiển cho thanh điều hướng với chỉ số ban đầu là 0
     PersistentTabController _controller =
         PersistentTabController(initialIndex: 0);
+    _controller.addListener(() {
+      // This code will run whenever the user changes the tab
+      print("Tab changed to: ${_controller.index}");
 
+      // Trigger any custom action here
+      if(_controller.index ==1){
+        FavouriteController favouriteController = Get.find();
+        favouriteController.loadDataQuote();
+      }
+    });
     return PersistentTabView(
       context,
       controller: _controller,

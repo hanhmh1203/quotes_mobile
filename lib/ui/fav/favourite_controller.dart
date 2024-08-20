@@ -10,7 +10,7 @@ class FavouriteController extends BaseController{
   Future<void> onReady() async {
     // TODO: implement onReady
     super.onReady();
-    // loadDataQuote();
+    loadDataQuote();
     // parseJson();
   }
 

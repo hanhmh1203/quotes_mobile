@@ -2,5 +2,8 @@
   "app_name":"Quotes",
   "author":"Author",
   "quote_type":"Type",
-  "mine":"Mine"
+  "mine":"Mine",
+  "str_fav": "Favourite",
+  "str_random": "Random"
+
 }

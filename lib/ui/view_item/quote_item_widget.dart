@@ -57,9 +57,9 @@ class QuoteItemWidget extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.only(left: 10),
                         child: Text(
-                          controller.quoteVM.type,
+                          controller.quoteVM.type.toUpperCase(),
                           style: const TextStyle(
-                              fontSize: 18,
+                              fontSize: 12,
                               color: Color(0xff00008b),
                               fontWeight: FontWeight.bold),
                         ),

@@ -33,28 +33,30 @@ class LeftMenuScreen extends GetView<LeftMenuController> {
                   fontSize: 32,
                   fontStyle: FontStyle.italic),
             ).tr(),
-            Obx(() => ListView.builder(
-                  shrinkWrap: true,
-                  // Add this to prevent ListView.builder from taking infinite height
-                  physics: NeverScrollableScrollPhysics(),
-                  // Disable scrolling of ListView.builder
-                  itemCount: controller.types.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      leading: Icon(Icons.label), // Use a suitable icon
-                      title: Text(controller.types[index].type.toUpperCase()),
-                      onTap: () {
-                        print("go back");
-                        // StartController controller = Get.find();
-                        controller.clickItem(
-                            typeModel: controller.types[index]);
-                        // Get.back();
-                        Navigator.pop(context);
-                        // Close drawer when an item is tapped
-                        // Handle onTap event here!
-                      },
-                    );
-                  },
+            Obx(() => Expanded(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    // Add this to prevent ListView.builder from taking infinite height
+                    physics: AlwaysScrollableScrollPhysics(),
+                    // Disable scrolling of ListView.builder
+                    itemCount: controller.types.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        leading: Icon(Icons.label), // Use a suitable icon
+                        title: Text(controller.types[index].type.toUpperCase()),
+                        onTap: () {
+                          print("go back");
+                          // StartController controller = Get.find();
+                          controller.clickItem(
+                              typeModel: controller.types[index]);
+                          // Get.back();
+                          Navigator.pop(context);
+                          // Close drawer when an item is tapped
+                          // Handle onTap event here!
+                        },
+                      );
+                    },
+                  ),
                 )),
           ],
         ),

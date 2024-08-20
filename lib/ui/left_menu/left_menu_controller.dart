@@ -19,7 +19,7 @@ class LeftMenuController extends BaseController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    _loadType();
+    loadType();
   }
 
   @override
@@ -32,16 +32,18 @@ class LeftMenuController extends BaseController {
   void onClose() {
     // TODO: implement onClose
     super.onClose();
+    authors.close();
+    types.close();
   }
 
-  _loadType() async {
+  loadType() async {
     TypeRepository repository = Get.find();
     var data = await repository.loadTypes();
     types.addAll(data);
     LogHelper.showLog(
         className: 'LeftMenuController',
         funcName: '_loadType',
-        message: 'data error ');
+        message: 'data error ${data.toString()}');
   }
   clickItem({required QuoteTypeModel typeModel}){
     StartController controller = Get.find();
