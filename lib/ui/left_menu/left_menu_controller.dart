@@ -19,7 +19,7 @@ class LeftMenuController extends BaseController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    loadType();
+    // loadType();
   }
 
   @override
@@ -35,16 +35,19 @@ class LeftMenuController extends BaseController {
     authors.close();
     types.close();
   }
-
-  loadType() async {
-    TypeRepository repository = Get.find();
-    var data = await repository.loadTypes();
-    types.addAll(data);
-    LogHelper.showLog(
-        className: 'LeftMenuController',
-        funcName: '_loadType',
-        message: 'data error ${data.toString()}');
+  setType(List<QuoteTypeModel>_types){
+    types.clear();
+    types.addAll(_types);
   }
+  // loadType() async {
+  //   TypeRepository repository = Get.find();
+  //   var data = await repository.loadTypesNotMine();
+  //   types.addAll(data);
+  //   // LogHelper.showLog(
+  //   //     className: 'LeftMenuController',
+  //   //     funcName: '_loadType',
+  //   //     message: 'data error ${data.toString()}');
+  // }
   clickItem({required QuoteTypeModel typeModel}){
     StartController controller = Get.find();
     controller.setTitle(typeModel.type);

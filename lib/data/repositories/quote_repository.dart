@@ -59,8 +59,8 @@ class QuoteRepository extends BaseRepository {
     return quotes;
   }
 
-  Future<List<QuoteModel>> loadQuotes() async {
-    final quotes = await isar.quoteModels.where().findAll();
+  Future<List<QuoteModel>> loadQuotesNotMine() async {
+    final quotes = await isar.quoteModels.filter().isMineEqualTo(false).findAll();
     for (var quote in quotes) {
       quote.author.loadSync();
       quote.quoteTypeModel.loadSync();
@@ -69,7 +69,7 @@ class QuoteRepository extends BaseRepository {
       quote.tempQuoteTypes = quote.quoteTypeModel.toList();
     }
 
-    final authors = await isar.authorModels.where().findAll();
+    // final authors = await isar.authorModels.where().findAll();
     return quotes;
   }
 

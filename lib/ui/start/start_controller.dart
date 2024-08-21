@@ -14,6 +14,7 @@ import 'package:quotes_mobile/data/repositories/type_repository.dart';
 import 'package:quotes_mobile/ui/base_controller.dart';
 
 import '../../data/json_models/quote_json_model.dart';
+import '../left_menu/left_menu_controller.dart';
 
 class StartController extends BaseController {
   RxList<QuoteModel> quotes = RxList();
@@ -65,16 +66,25 @@ class StartController extends BaseController {
     setTitle(tr("app_name"));
     quotes.clear();
     QuoteRepository repository = Get.find();
-    var list = await repository.loadQuotes();
+    var list = await repository.loadQuotesNotMine();
     quotes.addAll(list);
+    _setDataForTypes();
+  }
+
+  _setDataForTypes() {
+    LeftMenuController left = Get.find();
+    left.setType([]);
+    List<QuoteTypeModel> types =
+        quotes.expand((quote) => quote.quoteTypeModel).toSet().toList();
+    left.setType(types);
   }
 
   Future<void> loadQuoteByType({required QuoteTypeModel typeModel}) async {
-    QuoteRepository repository = Get.find();
     quotes.clear();
+    // quotes.refresh();
+    QuoteRepository repository = Get.find();
     var list = await repository.loadQuotesByType(typeModel: typeModel);
     quotes.addAll(list);
-
   }
 
   Future<void> loadDataAuthor() async {
@@ -84,6 +94,6 @@ class StartController extends BaseController {
 
   Future<void> loadDataType() async {
     TypeRepository repository = Get.find();
-    var list = await repository.loadTypes();
+    var list = await repository.loadTypesNotMine();
   }
 }

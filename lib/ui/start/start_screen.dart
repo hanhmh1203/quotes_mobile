@@ -22,10 +22,9 @@ class StartScreen extends GetView<StartController> {
           actions: [
             IconButton(
               icon: Icon(Icons.refresh),
-              onPressed: () {
-                controller.loadDataQuote();
-                LeftMenuController left = Get.find();
-                left.loadType();
+              onPressed: () async {
+                await controller.loadDataQuote();
+
                 // Add your refresh logic here
               },
             ),

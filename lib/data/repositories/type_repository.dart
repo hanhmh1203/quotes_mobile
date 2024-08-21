@@ -17,7 +17,7 @@ class TypeRepository {
     });
   }
 
-  Future<List<QuoteTypeModel>> loadTypes() async {
+  Future<List<QuoteTypeModel>> loadTypesNotMine() async {
     final types = await isar.quoteTypeModels.where().findAll();
     // for (var type in types) {
     //   type.quotes.loadSync();

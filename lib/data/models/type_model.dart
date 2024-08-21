@@ -17,7 +17,13 @@ class QuoteTypeModel {
   String toString() {
     return 'QuoteTypeModel{id: $id, type: $type, quotes: $quotes}';
   }
-
+  bool operator == (Object other) =>
+      identical(this, other) ||
+          other is QuoteTypeModel &&
+              runtimeType == other.runtimeType &&
+              type == other.type;
+  @override
+  int get hashCode => type.hashCode;
 // @override
   // String toString() {
   //   return 'QuoteTypeModel{id: $id, type: $type}';
