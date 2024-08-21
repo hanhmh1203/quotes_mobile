@@ -2,5 +2,11 @@
   "app_name":"Quotes",
   "author":"Tác giả",
   "quote_type":"Thể loại",
-  "mine":"Của Tôi"
+  "mine":"Của Tôi",
+  "confirm_delete": "Xác nhận xóa",
+  "question_delete": "Bạn có chắc chắn muốn xóa không?",
+  "cancel": "Hủy",
+  "delete": "Xóa",
+  "save": "Lưu"
+
 }
