@@ -129,11 +129,11 @@ class DialogHelper {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Confirm delete').tr(),
-          content: Text('Are you sure you want to delete ?').tr(),
+          title: const Text('confirm_delete').tr(),
+          content: Text('question_delete').tr(),
           actions: <Widget>[
             TextButton(
-              child: const Text('Cancel'),
+              child: const Text('cancel').tr(),
               onPressed: () {
                 Get.back();
               },
@@ -142,7 +142,10 @@ class DialogHelper {
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.red,
               ),
-              child: const Text('Delete'),
+              child: const Text(
+                'Delete',
+                style: TextStyle(color: Colors.white),
+              ).tr(),
               onPressed: () async {
                 onDelete(id);
                 Get.back();

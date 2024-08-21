@@ -4,6 +4,10 @@
   "quote_type":"Type",
   "mine":"Mine",
   "confirm_delete": "Confirm delete",
-  "question_delete": "Are you sure you want to delete ?"
+  "question_delete": "Are you sure you want to delete ?",
+  "cancel": "Cancel",
+  "delete": "Delete",
+  "save": "Save"
+
 
 }
