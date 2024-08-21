@@ -42,17 +42,13 @@ class LeftMenuScreen extends GetView<LeftMenuController> {
                     itemCount: controller.types.length,
                     itemBuilder: (context, index) {
                       return ListTile(
-                        leading: Icon(Icons.label), // Use a suitable icon
+                        leading: const Icon(Icons.label), // Use a suitable icon
                         title: Text(controller.types[index].type.toUpperCase()),
                         onTap: () {
-                          print("go back");
-                          // StartController controller = Get.find();
+                          Navigator.pop(context);
                           controller.clickItem(
                               typeModel: controller.types[index]);
                           // Get.back();
-                          Navigator.pop(context);
-                          // Close drawer when an item is tapped
-                          // Handle onTap event here!
                         },
                       );
                     },
@@ -63,39 +59,4 @@ class LeftMenuScreen extends GetView<LeftMenuController> {
       ),
     );
   }
-// @override
-// Widget build(BuildContext context) {
-//   // TODO: implement build
-//   return Drawer(
-//     child: ListView(
-//       padding: EdgeInsets.only(top: 50),
-//       children: <Widget>[
-//         ListTile(
-//           leading: Icon(Icons.home), // Biểu tượng ở bên trái của mục
-//           title: Text('Home'), // Nội dung văn bản của mục
-//           onTap: () {
-//             Navigator.pop(context); // Đóng drawer khi nhấn vào mục này
-//             // Thêm mã xử lý sự kiện onTap tại đây!
-//           },
-//         ),
-//         ListTile(
-//           leading: Icon(Icons.settings),
-//           title: Text('Settings'),
-//           onTap: () {
-//             Navigator.pop(context); // Đóng drawer khi nhấn vào mục này
-//             // Thêm mã xử lý sự kiện onTap tại đây!
-//           },
-//         ),
-//         ListTile(
-//           leading: Icon(Icons.contacts),
-//           title: Text('Contact Us'),
-//           onTap: () {
-//             Navigator.pop(context); // Đóng drawer khi nhấn vào mục này
-//             // Thêm mã xử lý sự kiện onTap tại đây!
-//           },
-//         ),
-//       ],
-//     ),
-//   );
-// }
 }

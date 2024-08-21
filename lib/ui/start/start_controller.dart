@@ -63,17 +63,18 @@ class StartController extends BaseController {
 
   Future<void> loadDataQuote() async {
     setTitle(tr("app_name"));
+    quotes.clear();
     QuoteRepository repository = Get.find();
     var list = await repository.loadQuotes();
-    quotes.clear();
     quotes.addAll(list);
   }
 
   Future<void> loadQuoteByType({required QuoteTypeModel typeModel}) async {
     QuoteRepository repository = Get.find();
-    var list = await repository.loadQuotesByType(typeModel: typeModel);
     quotes.clear();
+    var list = await repository.loadQuotesByType(typeModel: typeModel);
     quotes.addAll(list);
+
   }
 
   Future<void> loadDataAuthor() async {

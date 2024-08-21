@@ -18,7 +18,7 @@ class StartScreen extends GetView<StartController> {
     // controller.parseJson();
     return Scaffold(
         appBar: AppBar(
-          title: Obx(() => Text('${controller.title.value}').tr()),
+          title: Obx(() => Text('${controller.title.value.toUpperCase()}').tr()),
           actions: [
             IconButton(
               icon: Icon(Icons.refresh),
