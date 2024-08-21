@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:path/path.dart';
 import 'package:quotes_mobile/data/models/quote_model.dart';
+import 'package:quotes_mobile/ui/demo_dialog/dialog_helper.dart';
+import 'package:quotes_mobile/ui/demo_dialog/dialog_helper_delete.dart';
+import 'package:quotes_mobile/ui/view_item/view_item_page.dart';
 
 import 'quote_item_controller.dart';
 import 'quote_view_model.dart';
 
-class QuoteItemWidget extends StatelessWidget {
+class QuoteItemMineWidget extends QuoteItemWidget {
   final Color color;
 
   final QuoteModel itemVM;
 
-  QuoteItemWidget({required this.color, required this.itemVM, super.key});
+  QuoteItemMineWidget({required this.color, required this.itemVM, super.key})
+      : super(color: color, itemVM: itemVM);
 
   @override
   Widget build(BuildContext context) {
@@ -57,9 +62,9 @@ class QuoteItemWidget extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.only(left: 10),
                         child: Text(
-                          controller.quoteVM.type.toUpperCase(),
+                          controller.quoteVM.type,
                           style: const TextStyle(
-                              fontSize: 12,
+                              fontSize: 18,
                               color: Color(0xff00008b),
                               fontWeight: FontWeight.bold),
                         ),
@@ -130,36 +135,22 @@ class QuoteItemWidget extends StatelessWidget {
         });
   }
 
-  Widget widgetButtonRight(QuoteItemController controller) {
-    return Expanded(
-        flex: 1,
-        // Chiếm 15% diện tích (30% còn lại chia đều cho hai cột)
-        child: IconButton(
-          onPressed: () {
-            // Your onPressed function here
-            controller.shareQuote();
-          },
-          icon: Icon(Icons.share, color: Color(0xff00008b)),
-        ));
-  }
-
+  @override
   Widget widgetButtonLeft(QuoteItemController controller) {
     return Expanded(
       flex: 1,
       // Chiếm 15% diện tích (30% còn lại chia đều cho hai cột)
-      child: Obx(
-        () => IconButton(
-          icon: Icon(
-            Icons.favorite,
-            color: controller.quoteVM.isFav.value
-                ? const Color(0xffE55200)
-                : const Color(0xff00008b),
-          ),
-          onPressed: () {
-            // Your onPressed function here
-            controller.toggleFavorite();
-          },
+      child: IconButton(
+        icon: Icon(
+          Icons.delete,
+          color: const Color(0xff00008b),
         ),
+        onPressed: () {
+         DialogHelper.openDialogDelete(Get.context!,controller.deleteQuote,itemVM.id);
+          // DialogHelperDelete().openDialogDelete(controller.deleteQuote(
+          //         itemVM.id) // Thực hiện hành động xóa khi xác nhận
+          //     );
+        },
       ),
     );
   }

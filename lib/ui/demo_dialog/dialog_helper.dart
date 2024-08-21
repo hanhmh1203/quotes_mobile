@@ -1,13 +1,15 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:quotes_mobile/ui/mine/quote_mine_view_model.dart';
 import 'package:quotes_mobile/ui/mine/mine_controller.dart';
 
-
 class DialogHelper {
   final MineController controller = Get.find<MineController>();
 
-  void openDialog(BuildContext context,Future<void> Function(QuoteMineViewModel model)  onConfirm ) {
+  void openDialog(BuildContext context,
+      Future<void> Function(QuoteMineViewModel model) onConfirm) {
     TextEditingController quoteController = TextEditingController();
     TextEditingController authorController = TextEditingController();
     TextEditingController typeController = TextEditingController();
@@ -86,6 +88,14 @@ class DialogHelper {
                     ),
                     TextButton(
                       onPressed: () async {
+                        if (quoteController.text.isEmpty) {
+                          Fluttertoast.showToast(
+                            msg: 'Please fill in all fields',
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                          );
+                          return;
+                        }
                         final newQuote = QuoteMineViewModel(
                           quote: quoteController.text,
                           type: typeController.text,
@@ -110,6 +120,40 @@ class DialogHelper {
           ),
         ),
       ),
+    );
+  }
+
+  static void openDialogDelete(
+      BuildContext context, Function(int id) onDelete, int id) {
+    showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('confirm_delete').tr(),
+          content: Text('question_delete').tr(),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('cancel').tr(),
+              onPressed: () {
+                Get.back();
+              },
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.red,
+              ),
+              child: const Text(
+                'Delete',
+                style: TextStyle(color: Colors.white),
+              ).tr(),
+              onPressed: () async {
+                onDelete(id);
+                Get.back();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

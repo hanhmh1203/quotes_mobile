@@ -4,6 +4,11 @@
   "quote_type":"Type",
   "mine":"Mine",
   "str_fav": "Favourite",
-  "str_random": "Random"
+  "str_random": "Random",
+  "confirm_delete": "Confirm delete",
+  "question_delete": "Are you sure you want to delete ?",
+  "cancel": "Cancel",
+  "delete": "Delete",
+  "save": "Save"
 
 }
