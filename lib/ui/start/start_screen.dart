@@ -18,7 +18,8 @@ class StartScreen extends GetView<StartController> {
     // controller.parseJson();
     return Scaffold(
         appBar: AppBar(
-          title: Obx(() => Text('${controller.title.value.toUpperCase()}').tr()),
+          title:
+              Obx(() => Text('${controller.title.value.toUpperCase()}').tr()),
           actions: [
             IconButton(
               icon: Icon(Icons.refresh),
@@ -44,6 +45,7 @@ class StartScreen extends GetView<StartController> {
                       // Get color in order from the colors list
                       final color = colors[index % colors.length];
                       return QuoteItemWidget(
+                        key: ValueKey(controller.quotes[index].getKey()),
                         color: color,
                         itemVM: controller.quotes[index],
                       );

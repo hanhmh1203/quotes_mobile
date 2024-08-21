@@ -39,15 +39,6 @@ class LeftMenuController extends BaseController {
     types.clear();
     types.addAll(_types);
   }
-  // loadType() async {
-  //   TypeRepository repository = Get.find();
-  //   var data = await repository.loadTypesNotMine();
-  //   types.addAll(data);
-  //   // LogHelper.showLog(
-  //   //     className: 'LeftMenuController',
-  //   //     funcName: '_loadType',
-  //   //     message: 'data error ${data.toString()}');
-  // }
   clickItem({required QuoteTypeModel typeModel}){
     StartController controller = Get.find();
     controller.setTitle(typeModel.type);

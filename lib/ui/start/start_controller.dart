@@ -87,13 +87,13 @@ class StartController extends BaseController {
     quotes.addAll(list);
   }
 
-  Future<void> loadDataAuthor() async {
-    AuthorRepository repository = Get.find();
-    await repository.loadAuthors();
-  }
+  // Future<void> loadDataAuthor() async {
+  //   AuthorRepository repository = Get.find();
+  //   await repository.loadAuthors();
+  // }
 
-  Future<void> loadDataType() async {
-    TypeRepository repository = Get.find();
-    var list = await repository.loadTypesNotMine();
-  }
+  // Future<void> loadDataType() async {
+  //   TypeRepository repository = Get.find();
+  //   var list = await repository.loadTypesNotMine();
+  // }
 }

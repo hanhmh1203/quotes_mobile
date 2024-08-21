@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:quotes_mobile/core/log_helper.dart';
 import 'package:quotes_mobile/data/models/quote_model.dart';
 
 class QuoteViewModel {
@@ -19,6 +20,7 @@ class QuoteViewModel {
     quoteViewModel.content = quote.content;
     quoteViewModel.isFav.value = quote.isFavorite;
     quoteViewModel.author = quote.author.value?.name ?? "author";
+    LogHelper.showLog(message: "fromQuoteModel type: ${quoteViewModel.type}, \n content: ${quoteViewModel.content}");
     return quoteViewModel;
   }
 }

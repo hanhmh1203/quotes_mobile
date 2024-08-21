@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:quotes_mobile/core/log_helper.dart';
 import 'package:quotes_mobile/data/models/quote_model.dart';
 
 import 'quote_item_controller.dart';
