@@ -6,6 +6,7 @@ import 'package:quotes_mobile/core/log_helper.dart';
 import 'package:quotes_mobile/ui/fav/favourite_controller.dart';
 import 'package:quotes_mobile/ui/mine/mine_page.dart';
 import 'package:quotes_mobile/ui/random/random_page.dart';
+import 'package:quotes_mobile/ui/start/start_controller.dart';
 
 import '../fav/favourite_screen.dart';
 import '../setting/setting_screen.dart';
@@ -21,7 +22,7 @@ class BottomNavBarScreen extends StatelessWidget {
       return [
         const StartScreen(),
         const FavouriteScreen(),
-        const RandomScreen(),
+        // const RandomScreen(),
         const MineScreen(),
         // const SettingScreen(),
       ];
@@ -43,12 +44,12 @@ class BottomNavBarScreen extends StatelessWidget {
           inactiveColorPrimary: Colors.grey,
         ),
 
-        PersistentBottomNavBarItem(
-          icon: const Icon(Icons.invert_colors_on_outlined),
-          title: ("Random"),
-          activeColorPrimary: Colors.blue,
-          inactiveColorPrimary: Colors.grey,
-        ),
+        // PersistentBottomNavBarItem(
+        //   icon: const Icon(Icons.invert_colors_on_outlined),
+        //   title: ("Random"),
+        //   activeColorPrimary: Colors.blue,
+        //   inactiveColorPrimary: Colors.grey,
+        // ),
         PersistentBottomNavBarItem(
           icon: const Icon(Icons.insert_emoticon),
           title: ("Mine"),
@@ -78,9 +79,13 @@ class BottomNavBarScreen extends StatelessWidget {
       print("Tab changed to: ${_controller.index}");
 
       // Trigger any custom action here
-      if(_controller.index ==1){
+      if (_controller.index == 1) {
         FavouriteController favouriteController = Get.find();
         favouriteController.loadDataQuote();
+      }
+      if (_controller.index == 0) {
+        StartController startController = Get.find();
+        startController.reloadData();
       }
     });
     return PersistentTabView(

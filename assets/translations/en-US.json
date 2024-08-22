@@ -6,7 +6,7 @@
   "str_fav": "Favourite",
   "str_random": "Random",
   "confirm_delete": "Confirm delete",
-  "question_delete": "Are you sure you want to delete ?",
+  "question_delete": "Are you sure you want to delete this?",
   "cancel": "Cancel",
   "delete": "Delete",
   "save": "Save"

@@ -15,9 +15,9 @@ class FavouriteController extends BaseController{
   }
 
   Future<void> loadDataQuote() async {
+    quotes.clear();
     QuoteRepository repository = Get.find();
     var list = await repository.loadQuotesFav();
-    quotes.clear();
     quotes.addAll(list);
   }
 

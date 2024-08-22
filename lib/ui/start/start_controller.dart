@@ -20,6 +20,7 @@ class StartController extends BaseController {
   RxList<QuoteModel> quotes = RxList();
   RxString title = tr("app_name").obs;
   SharedUtils sharedUtils = Get.find();
+  QuoteTypeModel? currentTypeSelected;
 
   @override
   void onClose() {
@@ -62,7 +63,16 @@ class StartController extends BaseController {
     // await repository.loadQuotes();
   }
 
+  Future<void> reloadData() async {
+    if (currentTypeSelected != null) {
+      loadQuoteByType(typeModel: currentTypeSelected!);
+    }else{
+      loadDataQuote();
+    }
+  }
+
   Future<void> loadDataQuote() async {
+    currentTypeSelected = null;
     setTitle(tr("app_name"));
     quotes.clear();
     QuoteRepository repository = Get.find();
@@ -80,6 +90,7 @@ class StartController extends BaseController {
   }
 
   Future<void> loadQuoteByType({required QuoteTypeModel typeModel}) async {
+    currentTypeSelected = typeModel;
     quotes.clear();
     // quotes.refresh();
     QuoteRepository repository = Get.find();
@@ -87,13 +98,13 @@ class StartController extends BaseController {
     quotes.addAll(list);
   }
 
-  // Future<void> loadDataAuthor() async {
-  //   AuthorRepository repository = Get.find();
-  //   await repository.loadAuthors();
-  // }
+// Future<void> loadDataAuthor() async {
+//   AuthorRepository repository = Get.find();
+//   await repository.loadAuthors();
+// }
 
-  // Future<void> loadDataType() async {
-  //   TypeRepository repository = Get.find();
-  //   var list = await repository.loadTypesNotMine();
-  // }
+// Future<void> loadDataType() async {
+//   TypeRepository repository = Get.find();
+//   var list = await repository.loadTypesNotMine();
+// }
 }
