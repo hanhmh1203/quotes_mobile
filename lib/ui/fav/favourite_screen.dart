@@ -10,7 +10,7 @@ import 'favourite_page.dart';
 
 class FavouriteScreen extends GetView<FavouriteController> {
   const FavouriteScreen({super.key});
-
+  static String screenName = "FavouriteScreen";
   @override
   // TODO: implement controller
   FavouriteController get controller => Get.put(FavouriteController());
@@ -42,7 +42,7 @@ class FavouriteScreen extends GetView<FavouriteController> {
                     itemBuilder: (context, index) {
                       // Get color in order from the colors list
                       final color = colors[index % colors.length];
-                      return QuoteItemWidget(
+                      return QuoteItemWidget(screenName: screenName,
                         color: color,
                         itemVM: controller.quotes[index],
                       );

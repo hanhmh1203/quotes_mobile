@@ -6,7 +6,9 @@ import 'package:quotes_mobile/data/models/quote_model.dart';
 import 'package:quotes_mobile/data/repositories/quote_repository.dart';
 import 'package:quotes_mobile/ui/base_controller.dart';
 import 'package:quotes_mobile/ui/fav/favourite_controller.dart';
+import 'package:quotes_mobile/ui/fav/favourite_page.dart';
 import 'package:quotes_mobile/ui/mine/mine_controller.dart';
+import 'package:quotes_mobile/ui/start/start_page.dart';
 import 'package:quotes_mobile/ui/view_item/view_item_page.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -17,14 +19,23 @@ class QuoteItemController extends BaseController {
 
   QuoteRepository quoteRepository = Get.find();
 
-  toggleFavorite() async {
+  toggleFavorite(String screenName) async {
     quoteVM.isFav.value = !quoteVM.isFav.value;
     await quoteRepository.saveQuoteFav(quoteVM.isFav.value, quoteVM.id);
-    if(Get.isRegistered<FavouriteController>()){
+    if(screenName == FavouriteScreen.screenName){
       FavouriteController favouriteController = Get.find();
-      favouriteController.loadDataQuote();
-    }
+      favouriteController.updateFav(quoteVM.id);
 
+      StartController startController = Get.find();
+      startController.reloadData();
+    }
+    // if(screenName == StartScreen.screenName){
+    //
+    // }
+    // if(Get.isRegistered<FavouriteController>()){
+    //   FavouriteController favouriteController = Get.find();
+    //   favouriteController.loadDataQuote();
+    // }
   }
 
   deleteQuote(int id) async {

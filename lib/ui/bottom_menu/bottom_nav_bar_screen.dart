@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_instance/get_instance.dart';
@@ -33,13 +34,13 @@ class BottomNavBarScreen extends StatelessWidget {
       return [
         PersistentBottomNavBarItem(
           icon: const Icon(Icons.home), // Biểu tượng của mục
-          title: ("Home"), // Tiêu đề của mục
+          title: (tr("str_home")), // Tiêu đề của mục
           activeColorPrimary: Colors.blue, // Màu khi mục được chọn
           inactiveColorPrimary: Colors.grey, // Màu khi mục không được chọn
         ),
         PersistentBottomNavBarItem(
           icon: const Icon(Icons.favorite_border_rounded),
-          title: ("Favorite"),
+          title: (tr("str_fav")),
           activeColorPrimary: Colors.blue,
           inactiveColorPrimary: Colors.grey,
         ),
@@ -52,7 +53,7 @@ class BottomNavBarScreen extends StatelessWidget {
         // ),
         PersistentBottomNavBarItem(
           icon: const Icon(Icons.insert_emoticon),
-          title: ("Mine"),
+          title: (tr("mine")),
           activeColorPrimary: Colors.blue,
           inactiveColorPrimary: Colors.grey,
         ),
@@ -80,10 +81,13 @@ class BottomNavBarScreen extends StatelessWidget {
 
       // Trigger any custom action here
       if (_controller.index == 1) {
-        FavouriteController favouriteController = Get.find();
-        favouriteController.loadDataQuote();
+        if (Get.isRegistered<FavouriteController>()) {
+          FavouriteController favouriteController = Get.find();
+          favouriteController.loadDataQuote();
+        }
       }
       if (_controller.index == 0) {
+        LogHelper.showLog(message: "hanhmh1203 startController.reloadData");
         StartController startController = Get.find();
         startController.reloadData();
       }

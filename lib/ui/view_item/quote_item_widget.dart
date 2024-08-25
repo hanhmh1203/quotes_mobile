@@ -10,8 +10,13 @@ class QuoteItemWidget extends StatelessWidget {
   final Color color;
 
   final QuoteModel itemVM;
+  String screenName = "StartScreen";
 
-  QuoteItemWidget({required this.color, required this.itemVM, super.key});
+  QuoteItemWidget(
+      {required this.color,
+      required this.itemVM,
+      required this.screenName,
+      super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -158,7 +163,7 @@ class QuoteItemWidget extends StatelessWidget {
           ),
           onPressed: () {
             // Your onPressed function here
-            controller.toggleFavorite();
+            controller.toggleFavorite(screenName);
           },
         ),
       ),

@@ -15,7 +15,7 @@ class QuoteItemMineWidget extends QuoteItemWidget {
   final QuoteModel itemVM;
 
   QuoteItemMineWidget({required this.color, required this.itemVM, super.key})
-      : super(color: color, itemVM: itemVM);
+      : super(color: color, screenName: "Mine",itemVM: itemVM);
 
   @override
   Widget build(BuildContext context) {

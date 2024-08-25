@@ -11,7 +11,7 @@ import 'start_page.dart';
 
 class StartScreen extends GetView<StartController> {
   const StartScreen({super.key});
-
+  static String screenName = "StartScreen";
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -47,6 +47,7 @@ class StartScreen extends GetView<StartController> {
                       return QuoteItemWidget(
                         key: ValueKey(controller.quotes[index].getKey()),
                         color: color,
+                        screenName: screenName,
                         itemVM: controller.quotes[index],
                       );
                     },
