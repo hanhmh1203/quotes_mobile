@@ -6,7 +6,7 @@ import '../../data/models/quote_model.dart';
 import '../../data/repositories/quote_repository.dart';
 
 class FavouriteController extends BaseController {
-  RxList<QuoteModel> quotes = RxList();
+  RxList<QuoteModel> quotes = <QuoteModel>[].obs;
 
   @override
   Future<void> onReady() async {
@@ -21,14 +21,14 @@ class FavouriteController extends BaseController {
     QuoteRepository repository = Get.find();
     var list = await repository.loadQuotesFav();
     quotes.addAll(list);
+    refresh();
   }
 
   Future<void> updateFav(int id) async {
     int index = quotes.indexWhere((e){
       return e.id == id;
     });
-    LogHelper.showLog(message: "hanhmh1203 updateFav index:$index");
     quotes.removeAt(index);
-    quotes.refresh();
+    refresh();
   }
 }

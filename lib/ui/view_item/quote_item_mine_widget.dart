@@ -22,8 +22,9 @@ class QuoteItemMineWidget extends QuoteItemWidget {
     QuoteViewModel viewModel = QuoteViewModel.fromQuoteModel(itemVM);
     // QuoteItemController controller =
     //     Get.put(QuoteItemController(viewModel), tag: itemVM.getKey());
+    String tag = '$screenName-${itemVM.getKey()}';
     return GetBuilder<QuoteItemController>(
-        tag: itemVM.getKey(),
+        tag: tag,
         init: QuoteItemController(viewModel),
         builder: (controller) {
           return Container(

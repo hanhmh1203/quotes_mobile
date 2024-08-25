@@ -45,7 +45,7 @@ class StartScreen extends GetView<StartController> {
                       // Get color in order from the colors list
                       final color = colors[index % colors.length];
                       return QuoteItemWidget(
-                        key: ValueKey(controller.quotes[index].getKey()),
+                        key: ValueKey('$screenName-${controller.quotes[index].getKey()}'),
                         color: color,
                         screenName: screenName,
                         itemVM: controller.quotes[index],

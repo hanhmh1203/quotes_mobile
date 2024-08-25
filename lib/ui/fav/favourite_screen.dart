@@ -8,50 +8,48 @@ import '../../core/colors_type.dart';
 import '../view_item/view_item_page.dart';
 import 'favourite_page.dart';
 
-class FavouriteScreen extends GetView<FavouriteController> {
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+class FavouriteScreen extends StatelessWidget {
   const FavouriteScreen({super.key});
   static String screenName = "FavouriteScreen";
-  @override
-  // TODO: implement controller
-  FavouriteController get controller => Get.put(FavouriteController());
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
+    // Use GetBuilder to manage the controller and update UI
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('str_fav').tr(),
-        ),
-        body: Column(
-          children: [
-            // ElevatedButton(
-            //   onPressed: () {
-            //     controller.loadDataQuote();
-            //   },
-            //   child: Text("click"),
-            // ),
-            Expanded(
-              // Wrap ListView.builder with Expanded to avoid layout issues
-              child: Obx(
-                () {
-                  print(
-                      "FavouriteScreen controller.quotes.length:${controller.quotes.length}");
-                  return ListView.builder(
-                    itemCount: controller.quotes.length,
-                    // Number of items in the list
-                    itemBuilder: (context, index) {
-                      // Get color in order from the colors list
-                      final color = colors[index % colors.length];
-                      return QuoteItemWidget(screenName: screenName,
-                        color: color,
-                        itemVM: controller.quotes[index],
-                      );
-                    },
-                  );
-                },
-              ),
+      appBar: AppBar(
+        title: const Text('str_fav').tr(),
+      ),
+      body: Column(
+        children: [
+          Expanded(
+            // Wrap ListView.builder with Expanded to avoid layout issues
+            child: GetBuilder<FavouriteController>(
+              init: FavouriteController(), // Initialize the controller
+              builder: (controller) {
+                print(
+                    "FavouriteScreen controller.quotes.length:${controller.quotes.length}");
+                return ListView.builder(
+                  itemCount: controller.quotes.length,
+                  // Number of items in the list
+                  itemBuilder: (context, index) {
+                    // Get color in order from the colors list
+                    final color = colors[index % colors.length];
+                    return QuoteItemWidget(
+                      key: ValueKey('$screenName-${controller.quotes[index].getKey()}'),
+                      screenName: screenName,
+                      color: color,
+                      itemVM: controller.quotes[index],
+                    );
+                  },
+                );
+              },
             ),
-          ],
-        ));
+          ),
+        ],
+      ),
+    );
   }
 }

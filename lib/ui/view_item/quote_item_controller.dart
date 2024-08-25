@@ -21,13 +21,17 @@ class QuoteItemController extends BaseController {
 
   toggleFavorite(String screenName) async {
     quoteVM.isFav.value = !quoteVM.isFav.value;
-    await quoteRepository.saveQuoteFav(quoteVM.isFav.value, quoteVM.id);
+    quoteRepository.saveQuoteFav(quoteVM.isFav.value, quoteVM.id);
+
     if(screenName == FavouriteScreen.screenName){
       FavouriteController favouriteController = Get.find();
       favouriteController.updateFav(quoteVM.id);
 
+
       StartController startController = Get.find();
-      startController.reloadData();
+      startController.updateFav(quoteVM.id);
+
+    }else{
     }
     // if(screenName == StartScreen.screenName){
     //

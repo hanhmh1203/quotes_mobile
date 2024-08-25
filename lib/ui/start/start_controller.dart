@@ -21,6 +21,7 @@ class StartController extends BaseController {
   RxString title = tr("app_name").obs;
   SharedUtils sharedUtils = Get.find();
   QuoteTypeModel? currentTypeSelected;
+  bool shouldRefreshData = false;
 
   @override
   void onClose() {
@@ -60,14 +61,26 @@ class StartController extends BaseController {
     QuoteRepository repository = Get.find();
     repository.clearAllData();
     repository.saveQuoteSync(data);
-    // await repository.loadQuotes();
   }
 
   Future<void> reloadData() async {
-    if (currentTypeSelected != null) {
-      loadQuoteByType(typeModel: currentTypeSelected!);
-    }else{
-      loadDataQuote();
+    if (shouldRefreshData) {
+      shouldRefreshData = false;
+      if (currentTypeSelected != null) {
+        loadQuoteByType(typeModel: currentTypeSelected!);
+      } else {
+        loadDataQuote();
+      }
+    }
+  }
+
+  Future<void> updateFav(int id) async {
+    int index = quotes.indexWhere((e) {
+      return e.id == id;
+    });
+    if (index > -1) {
+      quotes[index].isFavorite = !quotes[index].isFavorite;
+      shouldRefreshData = true;
     }
   }
 
@@ -77,7 +90,7 @@ class StartController extends BaseController {
     quotes.clear();
     QuoteRepository repository = Get.find();
     var list = await repository.loadQuotesNotMine();
-    quotes.addAll(list);
+    quotes.assignAll(list);
     _setDataForTypes();
   }
 
@@ -95,7 +108,7 @@ class StartController extends BaseController {
     // quotes.refresh();
     QuoteRepository repository = Get.find();
     var list = await repository.loadQuotesByType(typeModel: typeModel);
-    quotes.addAll(list);
+    quotes.assignAll(list);
   }
 
 // Future<void> loadDataAuthor() async {
