@@ -47,6 +47,7 @@ class StartController extends BaseController {
       await sharedUtils.saveDBInit(true);
     }
     super.onInit();
+
   }
 
   @override
@@ -60,7 +61,7 @@ class StartController extends BaseController {
     List<QuoteJsonModel> data = await ReadJsonFileHelper.readDummyData();
     QuoteRepository repository = Get.find();
     repository.clearAllData();
-    repository.saveQuoteSync(data);
+    await repository.saveQuoteSync(data);
   }
 
   Future<void> reloadData() async {
@@ -90,6 +91,7 @@ class StartController extends BaseController {
     quotes.clear();
     QuoteRepository repository = Get.find();
     var list = await repository.loadQuotesNotMine();
+    LogHelper.showLog(message: "hanhmh1203 loadDataQuote list:${list.length}");
     quotes.assignAll(list);
     _setDataForTypes();
   }

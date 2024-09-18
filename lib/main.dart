@@ -55,6 +55,7 @@ class MyApp extends StatelessWidget {
     LogHelper.showLog(message: "hanhmh1203 Get.deviceLocale: ${Get.deviceLocale}");
     LogHelper.showLog(message: "hanhmh1203 context.locale: ${context.locale}");
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: Get.deviceLocale,

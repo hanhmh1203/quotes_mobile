@@ -60,7 +60,8 @@ class QuoteRepository extends BaseRepository {
   }
 
   Future<List<QuoteModel>> loadQuotesNotMine() async {
-    final quotes = await isar.quoteModels.filter().isMineEqualTo(false).findAll();
+    final quotes =
+        await isar.quoteModels.filter().isMineEqualTo(false).findAll();
     for (var quote in quotes) {
       quote.author.loadSync();
       quote.quoteTypeModel.loadSync();
@@ -112,7 +113,7 @@ class QuoteRepository extends BaseRepository {
     return quotes;
   }
 
-  void saveQuoteSync(List<QuoteJsonModel> list) async {
+  Future<void> saveQuoteSync(List<QuoteJsonModel> list) async {
     var data = list.map((e) => QuoteModel.fromJsonModel(e)).toList();
     for (var e in data) {
       var dbItem =

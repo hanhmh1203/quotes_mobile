@@ -19,7 +19,7 @@ class ReadJsonFileHelper {
   }
 
   static Future<List<QuoteJsonModel>> readDummyData() async {
-    var path = "assets/json/dummy_viet.json";
+    var path = "assets/json/dummy_english.json";
     final list = await _readJsonData(path: path);
     // Map<String, dynamic> jsonResponse = jsonDecode(jsonString);
     QuotesResponse quotesResponse = QuotesResponse.fromJson(list);

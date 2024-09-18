@@ -1,0 +1,254 @@
+{
+  "data": [
+    {
+      "author": "Albert Einstein",
+      "content": "Life is like riding a bicycle. To keep your balance, you must keep moving.",
+      "topic": "life, perseverance"
+    },
+    {
+      "author": "Walt Disney",
+      "content": "The way to get started is to quit talking and begin doing.",
+      "topic": "motivation, action"
+    },
+    {
+      "author": "Steve Jobs",
+      "content": "Your work is going to fill a large part of your life, and the only way to be truly satisfied is to do what you believe is great work.",
+      "topic": "work, passion"
+    },
+    {
+      "author": "Oprah Winfrey",
+      "content": "The biggest adventure you can take is to live the life of your dreams.",
+      "topic": "dreams, life"
+    },
+    {
+      "author": "Nelson Mandela",
+      "content": "The greatest glory in living lies not in never falling, but in rising every time we fall.",
+      "topic": "perseverance, life"
+    },
+    {
+      "author": "Eleanor Roosevelt",
+      "content": "The future belongs to those who believe in the beauty of their dreams.",
+      "topic": "dreams, future"
+    },
+    {
+      "author": "Mahatma Gandhi",
+      "content": "Live as if you were to die tomorrow. Learn as if you were to live forever.",
+      "topic": "life, learning"
+    },
+    {
+      "author": "Helen Keller",
+      "content": "The only thing worse than being blind is having sight but no vision.",
+      "topic": "vision, life"
+    },
+    {
+      "author": "Mark Twain",
+      "content": "The secret of getting ahead is getting started.",
+      "topic": "motivation, action"
+    },
+    {
+      "author": "Confucius",
+      "content": "It does not matter how slowly you go as long as you do not stop.",
+      "topic": "perseverance, progress"
+    },
+    {
+      "author": "Thomas Edison",
+      "content": "Genius is one percent inspiration and ninety-nine percent perspiration.",
+      "topic": "hard work, success"
+    },
+    {
+      "author": "John Lennon",
+      "content": "Life is what happens when you're busy making other plans.",
+      "topic": "life, spontaneity"
+    },
+    {
+      "author": "Aristotle",
+      "content": "We are what we repeatedly do. Excellence, then, is not an act, but a habit.",
+      "topic": "habits, excellence"
+    },
+    {
+      "author": "Henry Ford",
+      "content": "Whether you think you can or you think you can't, you're right.",
+      "topic": "belief, mindset"
+    },
+    {
+      "author": "Franklin D. Roosevelt",
+      "content": "The only thing we have to fear is fear itself.",
+      "topic": "fear, courage"
+    },
+    {
+      "author": "Martin Luther King Jr.",
+      "content": "Injustice anywhere is a threat to justice everywhere.",
+      "topic": "justice, equality"
+    },
+    {
+      "author": "Benjamin Franklin",
+      "content": "Tell me and I forget. Teach me and I remember. Involve me and I learn.",
+      "topic": "learning, education"
+    },
+    {
+      "author": "Winston Churchill",
+      "content": "Success is not final, failure is not fatal: It is the courage to continue that counts.",
+      "topic": "success, perseverance"
+    },
+    {
+      "author": "Abraham Lincoln",
+      "content": "In the end, it's not the years in your life that count. It's the life in your years.",
+      "topic": "life, legacy"
+    },
+    {
+      "author": "Leonardo da Vinci",
+      "content": "Simplicity is the ultimate sophistication.",
+      "topic": "simplicity, design"
+    },
+    {
+      "author": "Friedrich Nietzsche",
+      "content": "He who has a why to live can bear almost any how.",
+      "topic": "purpose, perseverance"
+    },
+    {
+      "author": "Anne Frank",
+      "content": "How wonderful it is that nobody need wait a single moment before starting to improve the world.",
+      "topic": "action, change"
+    },
+    {
+      "author": "Maya Angelou",
+      "content": "You will face many defeats in life, but never let yourself be defeated.",
+      "topic": "perseverance, strength"
+    },
+    {
+      "author": "Mother Teresa",
+      "content": "Spread love everywhere you go. Let no one ever come to you without leaving happier.",
+      "topic": "love, kindness"
+    },
+    {
+      "author": "Ralph Waldo Emerson",
+      "content": "The only way to have a friend is to be one.",
+      "topic": "friendship, relationships"
+    },
+    {
+      "author": "Albert Schweitzer",
+      "content": "Success is not the key to happiness. Happiness is the key to success.",
+      "topic": "happiness, success"
+    },
+    {
+      "author": "Henry David Thoreau",
+      "content": "Go confidently in the direction of your dreams! Live the life you've imagined.",
+      "topic": "dreams, life"
+    },
+    {
+      "author": "C.S. Lewis",
+      "content": "You are never too old to set another goal or to dream a new dream.",
+      "topic": "dreams, goals"
+    },
+    {
+      "author": "Jane Goodall",
+      "content": "What you do makes a difference, and you have to decide what kind of difference you want to make.",
+      "topic": "action, change"
+    },
+    {
+      "author": "Babe Ruth",
+      "content": "It's hard to beat a person who never gives up.",
+      "topic": "perseverance, strength"
+    },
+    {
+      "author": "Rosa Parks",
+      "content": "I have learned over the years that when one's mind is made up, this diminishes fear.",
+      "topic": "courage, determination"
+    },
+    {
+      "author": "Stephen Hawking",
+      "content": "However difficult life may seem, there is always something you can do and succeed at.",
+      "topic": "life, success"
+    },
+    {
+      "author": "J.K. Rowling",
+      "content": "It is our choices that show what we truly are, far more than our abilities.",
+      "topic": "choices, character"
+    },
+    {
+      "author": "Lao Tzu",
+      "content": "The journey of a thousand miles begins with one step.",
+      "topic": "journey, action"
+    },
+    {
+      "author": "Eleanor Roosevelt",
+      "content": "Do what you feel in your heart to be right—for you’ll be criticized anyway.",
+      "topic": "courage, conviction"
+    },
+    {
+      "author": "Marilyn Monroe",
+      "content": "Imperfection is beauty, madness is genius and it's better to be absolutely ridiculous than absolutely boring.",
+      "topic": "individuality, confidence"
+    },
+    {
+      "author": "Oscar Wilde",
+      "content": "Be yourself; everyone else is already taken.",
+      "topic": "individuality, authenticity"
+    },
+    {
+      "author": "Yoda",
+      "content": "Do or do not. There is no try.",
+      "topic": "action, determination"
+    },
+    {
+      "author": "Bob Marley",
+      "content": "The truth is, everyone is going to hurt you. You just got to find the ones worth suffering for.",
+      "topic": "relationships, love"
+    },
+    {
+      "author": "Dalai Lama",
+      "content": "Happiness is not something ready-made. It comes from your own actions.",
+      "topic": "happiness, action"
+    },
+    {
+      "author": "Vincent Van Gogh",
+      "content": "What would life be if we had no courage to attempt anything?",
+      "topic": "courage, life"
+    },
+    {
+      "author": "Socrates",
+      "content": "The only true wisdom is in knowing you know nothing.",
+      "topic": "wisdom, knowledge"
+    },
+    {
+      "author": "Maya Angelou",
+      "content": "You can't use up creativity. The more you use, the more you have.",
+      "topic": "creativity, potential"
+    },
+    {
+      "author": "William Shakespeare",
+      "content": "The earth has music for those who listen.",
+      "topic": "nature, beauty"
+    },
+    {
+      "author": "Confucius",
+      "content": "Real knowledge is to know the extent of one's ignorance.",
+      "topic": "knowledge, humility"
+    },
+    {
+      "author": "Buddha",
+      "content": "Do not dwell in the past, do not dream of the future, concentrate the mind on the present moment.",
+      "topic": "mindfulness, present"
+    },
+    {
+      "author": "Nelson Mandela",
+      "content": "It always seems impossible until it’s done.",
+      "topic": "perseverance, success"
+    },
+    {
+      "author": "Abraham Lincoln",
+      "content": "Whatever you are, be a good one.",
+      "topic": "excellence, life"
+    },
+    {
+      "author": "George Bernard Shaw",
+      "content": "Life isn't about finding yourself. Life is about creating yourself.",
+      "topic": "self-discovery, life"
+    },
+    {
+      "author": "Albert Einstein",
+      "content": "Imagination is more important than knowledge. Knowledge is limited. Imagination encircles the world.",
+      "topic": "imagination, creativity"
+    }
+  ]
+}
